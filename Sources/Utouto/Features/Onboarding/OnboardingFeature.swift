@@ -1,0 +1,128 @@
+import SwiftUI
+import ComposableArchitecture
+
+@Reducer
+struct OnboardingFeature {
+    @ObservableState
+    struct State: Equatable {
+        var isAuthorized = false
+        var isRequesting = false
+    }
+
+    enum Action {
+        case requestAuthorization
+        case authorizationResponse(Bool)
+        case openSettings
+
+        @CasePathable
+        enum Delegate {
+            case authorizationGranted
+        }
+
+        case delegate(Delegate)
+    }
+
+    @Dependency(\.notificationClient) var notificationClient
+    @Dependency(\.appRouter) var appRouter
+    @Dependency(\.logger) var logger
+
+    var body: some ReducerOf<Self> {
+        Reduce { state, action in
+            switch action {
+            case .requestAuthorization:
+                state.isRequesting = true
+                logger.log("[Onboarding] Requesting authorization...")
+                return .run { send in
+                    do {
+                        let granted = try await notificationClient.requestAuthorization()
+                        logger.log("[Onboarding] Authorization response: \(granted)")
+                        await send(.authorizationResponse(granted))
+                    } catch {
+                        logger.error("[Onboarding] Authorization error: \(error)")
+                        await send(.authorizationResponse(false))
+                    }
+                }
+
+            case let .authorizationResponse(granted):
+                logger.log("[Onboarding] authorizationResponse received: \(granted)")
+                state.isAuthorized = granted
+                state.isRequesting = false
+                if granted {
+                    logger.log("[Onboarding] Sending delegate authorizationGranted")
+                    return .send(.delegate(.authorizationGranted))
+                } else {
+                    logger.log("[Onboarding] Authorization not granted, staying on onboarding")
+                }
+                return .none
+
+            case .openSettings:
+                return .run { _ in
+                    await appRouter.openSettings()
+                }
+
+            case .delegate:
+                return .none
+            }
+        }
+    }
+}
+
+struct OnboardingFeatureView: View {
+    let store: StoreOf<OnboardingFeature>
+
+    var body: some View {
+        VStack(spacing: 24) {
+            Spacer()
+
+            Image(systemName: "bell.badge")
+                .font(.system(size: 80))
+                .foregroundStyle(.tint)
+
+            Text("通知許可")
+                .font(.largeTitle)
+                .fontWeight(.bold)
+
+            Text("うとうと が適切に動作するためには\n通知の許可が必要です。")
+                .multilineTextAlignment(.center)
+                .foregroundStyle(.secondary)
+                .padding(.horizontal)
+
+            Spacer()
+
+            VStack(spacing: 16) {
+                Button {
+                    print("[OnboardingView] '通知を許可' button tapped")
+                    store.send(.requestAuthorization)
+                } label: {
+                    if store.isRequesting {
+                        ProgressView()
+                            .tint(.white)
+                    } else {
+                        Text("通知を許可")
+                            .font(.headline)
+                            .foregroundStyle(.white)
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                .frame(height: 50)
+                .background(store.isRequesting ? Color.gray : Color.blue)
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+                .disabled(store.isRequesting)
+
+                Button {
+                    store.send(.openSettings)
+                } label: {
+                    Text("設定へ")
+                        .font(.headline)
+                        .foregroundStyle(.blue)
+                }
+                .frame(maxWidth: .infinity)
+                .frame(height: 50)
+                .background(Color(.systemGray6))
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+            }
+            .padding(.horizontal, 24)
+        }
+        .padding()
+    }
+}
