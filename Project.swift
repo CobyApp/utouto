@@ -7,6 +7,10 @@ let project = Project(
             url: "https://github.com/pointfreeco/swift-composable-architecture",
             requirement: .upToNextMajor(from: "1.10.0")
         ),
+        .remote(
+            url: "https://github.com/supabase/supabase-swift",
+            requirement: .upToNextMajor(from: "2.0.0")
+        ),
     ],
     settings: .settings(
         base: [
@@ -28,18 +32,13 @@ let project = Project(
             bundleId: "com.example.utouto",
             deploymentTargets: .iOS("17.0"),
             infoPlist: .file(path: "Sources/Utouto/Info.plist"),
-            sources: [
-                "Sources/Utouto/**",
-            ],
+            sources: ["Sources/Utouto/**"],
             resources: [],
             dependencies: [
                 .package(product: "ComposableArchitecture", type: .runtime),
+                .package(product: "Supabase", type: .runtime),
             ],
-            settings: .settings(
-                base: [
-                    "SWIFT_VERSION": "5.9",
-                ]
-            )
+            settings: .settings(base: ["SWIFT_VERSION": "5.9"])
         ),
         .target(
             name: "UtoutoTests",
@@ -47,12 +46,8 @@ let project = Project(
             product: .unitTests,
             bundleId: "com.example.utouto.tests",
             deploymentTargets: .iOS("17.0"),
-            sources: [
-                "Tests/UtoutoTests/**",
-            ],
-            dependencies: [
-                .target(name: "Utouto"),
-            ]
+            sources: ["Tests/UtoutoTests/**"],
+            dependencies: [.target(name: "Utouto")]
         ),
     ]
 )

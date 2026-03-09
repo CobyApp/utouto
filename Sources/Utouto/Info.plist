@@ -29,6 +29,19 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+
+	<!-- 権限 -->
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>アラーム用のクリップを作成するために写真・動画ライブラリへのアクセスが必要です</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>動画の音声を処理するためにマイクへのアクセスが必要です</string>
+
+	<!-- Supabase keys (replace with your values) -->
+	<key>SUPABASE_URL</key>
+	<string>https://fuacecrmahfycnfzxbyi.supabase.co</string>
+	<key>SUPABASE_ANON_KEY</key>
+	<string>sb_publishable_k7Sa5qboVvmuJw6HZdhCJg_JRB0APtm</string>
+
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -42,6 +55,8 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIRequiresFullScreen</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

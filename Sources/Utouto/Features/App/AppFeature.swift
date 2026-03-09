@@ -1,34 +1,22 @@
-import SwiftUI
+import Foundation
 import ComposableArchitecture
-
-// MARK: - AppFeature
 
 @Reducer
 struct AppFeature {
-@ObservableState
-struct State {
-        enum Tab: Hashable {
-            case alarms
-            case settings
-        }
-
-        enum Route: Equatable {
-            case ringing(alarmId: UUID)
-            case alarmEdit(alarm: Alarm?)
-            case characterSelect
-        }
-
+    @ObservableState
+    struct State {
+        enum Tab: Hashable { case alarms, myLibrary, community, settings }
         var tab: Tab = .alarms
         var needsOnboarding = true
-        var route: Route?
 
-        // Child states
         var onboarding = OnboardingFeature.State()
         var alarmList = AlarmListFeature.State()
+        var myLibrary = MyLibraryFeature.State()
+        var community = CommunityFeature.State()
         var settings = SettingsFeature.State()
-        var ringing: RingingFeature.State?
+
         var alarmEdit: AlarmEditFeature.State?
-        var characterSelect: CharacterSelectFeature.State?
+        var ringing: RingingFeature.State?
     }
 
     enum Action {
@@ -37,261 +25,118 @@ struct State {
         case setNeedsOnboarding(Bool)
         case handleDeepLink(URL)
         case setTab(State.Tab)
-        case dismissRoute
-        case dismissRinging
         case dismissAlarmEdit
-        case dismissCharacterSelect
+        case dismissRinging
         case onboarding(OnboardingFeature.Action)
         case alarmList(AlarmListFeature.Action)
+        case myLibrary(MyLibraryFeature.Action)
+        case community(CommunityFeature.Action)
         case settings(SettingsFeature.Action)
-        case ringing(RingingFeature.Action)
         case alarmEdit(AlarmEditFeature.Action)
-        case characterSelect(CharacterSelectFeature.Action)
+        case ringing(RingingFeature.Action)
     }
 
     @Dependency(\.notificationClient) var notificationClient
-    @Dependency(\.alarmRepository) var alarmRepository
-    @Dependency(\.logger) var logger
+    @Dependency(\.videoClipClient) var videoClipClient
 
     var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
+
             case .onAppear:
-                logger.log("[App] onAppear - checking notification authorization")
-                return .run { send in
-                    await send(.checkNotificationAuthorization)
-                }
+                return .run { send in await send(.checkNotificationAuthorization) }
 
             case .checkNotificationAuthorization:
                 return .run { send in
-                    let isAuthorized = await notificationClient.isAuthorized()
-                    logger.log("[App] checkNotificationAuthorization: isAuthorized=\(isAuthorized), needsOnboarding=\(!isAuthorized)")
-                    await send(.setNeedsOnboarding(!isAuthorized))
+                    let ok = await notificationClient.isAuthorized()
+                    await send(.setNeedsOnboarding(!ok))
                 }
 
-            case let .setNeedsOnboarding(value):
-                logger.log("[App] setNeedsOnboarding: \(value) (current: \(state.needsOnboarding))")
-                state.needsOnboarding = value
-                logger.log("[App] setNeedsOnboarding: after update: \(state.needsOnboarding)")
-                return .none
+            case let .setNeedsOnboarding(v):
+                state.needsOnboarding = v; return .none
 
             case let .handleDeepLink(url):
-                guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
-                      components.host == "ringing",
-                      let alarmIdStr = components.queryItems?.first(where: { $0.name == "alarmId" })?.value,
-                      let alarmId = UUID(uuidString: alarmIdStr) else {
-                    return .none
-                }
-                state.route = .ringing(alarmId: alarmId)
+                guard let comps = URLComponents(url: url, resolvingAgainstBaseURL: false),
+                      comps.host == "ringing",
+                      let idStr = comps.queryItems?.first(where: { $0.name == "alarmId" })?.value,
+                      let id = UUID(uuidString: idStr) else { return .none }
+                state.ringing = RingingFeature.State(alarmId: id)
                 return .none
 
-            case let .setTab(tab):
-                state.tab = tab
-                return .none
-
-            case .dismissRoute:
-                state.route = nil
-                state.ringing = nil
-                state.alarmEdit = nil
-                state.characterSelect = nil
-                return .none
+            case let .setTab(t):
+                state.tab = t; return .none
 
             case .alarmList(.delegate(.showAlarmEdit(let alarm))):
-                state.route = .alarmEdit(alarm: alarm)
                 state.alarmEdit = AlarmEditFeature.State(alarm: alarm)
                 return .none
 
-            case .alarmList(.delegate(.showCharacterSelect)):
-                state.route = .characterSelect
-                state.characterSelect = CharacterSelectFeature.State()
-                return .none
-
-            case .alarmList:
-                return .none // Handled by child reducer
-
-            case .settings(.delegate(.showCharacterSelect)):
-                state.route = .characterSelect
-                state.characterSelect = CharacterSelectFeature.State()
-                return .none
-
-            case .settings:
-                return .none // Handled by child reducer
-
-            case .ringing(.delegate(.dismiss)):
-                return .send(.dismissRoute)
-
-            case .ringing:
-                return .none // Handled by child reducer
+            case .alarmList: return .none
 
             case .alarmEdit(.delegate(.dismiss)):
-                return .send(.dismissRoute)
+                state.alarmEdit = nil; return .none
 
-            case .alarmEdit(.delegate(.saveAlarm(_))):
-                return .merge(
-                    .send(.dismissRoute),
-                    .send(.alarmList(.loadAlarms))
-                )
-
-            case .alarmEdit:
-                return .none // Handled by child reducer
-
-            case .characterSelect(.delegate(.dismiss)):
-                return .send(.dismissRoute)
-
-            case .characterSelect(.delegate(.selectCharacter(let character))):
-                return .merge(
-                    .send(.dismissRoute),
-                    .send(.alarmEdit(.updateCharacter(character))),
-                    .send(.settings(.updateDefaultCharacter(character)))
-                )
-
-            case .characterSelect:
-                return .none // Handled by child reducer
-
-            case .dismissRinging:
-                state.ringing = nil
-                return .none
-
-            case .dismissAlarmEdit:
+            case .alarmEdit(.delegate(.saveAlarm)):
                 state.alarmEdit = nil
+                return .send(.alarmList(.loadAlarms))
+
+            case .alarmEdit: return .none
+
+            case .myLibrary(.delegate(.selectClipForAlarm(let clip))):
+                var editState = AlarmEditFeature.State(alarm: nil)
+                editState.selectedClipId = clip.id
+                state.alarmEdit = editState
+                state.tab = .alarms
                 return .none
 
-            case .dismissCharacterSelect:
-                state.characterSelect = nil
-                return .none
+            case .myLibrary: return .none
+
+            case .community(.delegate(.useClipAsAlarm(let url, let communityClip))):
+                let clipId = UUID()
+                var editState = AlarmEditFeature.State(alarm: nil)
+                editState.selectedClipId = clipId
+                state.alarmEdit = editState
+                state.tab = .alarms
+                return .run { send in
+                    let audioFilename = url.lastPathComponent
+                    let clip = VideoClip(
+                        id: clipId,
+                        title: communityClip.title,
+                        sourceVideoFilename: "",
+                        audioFilename: audioFilename,
+                        thumbnailFilename: "",
+                        startSec: 0, endSec: communityClip.durationSec,
+                        durationSec: communityClip.durationSec,
+                        createdAt: Date(), isUploaded: true
+                    )
+                    try? await videoClipClient.saveClip(clip)
+                    await send(.myLibrary(.loadClips))
+                }
+
+            case .community: return .none
+
+            case .ringing(.delegate(.dismiss)):
+                state.ringing = nil; return .none
+            case .ringing: return .none
+
+            case .settings: return .none
 
             case .onboarding(.delegate(.authorizationGranted)):
-                logger.log("[App] Received onboarding delegate: authorizationGranted")
                 return .send(.setNeedsOnboarding(false))
+            case .onboarding: return .none
 
-            case .onboarding:
-                return .none // Handled by child reducer
+            case .dismissAlarmEdit:
+                state.alarmEdit = nil; return .none
+            case .dismissRinging:
+                state.ringing = nil; return .none
             }
         }
-        .ifLet(\.ringing, action: \.ringing) {
-            RingingFeature()
-        }
-        .ifLet(\.alarmEdit, action: \.alarmEdit) {
-            AlarmEditFeature()
-        }
-        .ifLet(\.characterSelect, action: \.characterSelect) {
-            CharacterSelectFeature()
-        }
+        .ifLet(\.alarmEdit, action: \.alarmEdit) { AlarmEditFeature() }
+        .ifLet(\.ringing, action: \.ringing) { RingingFeature() }
 
-        Scope(state: \.onboarding, action: \.onboarding) {
-            OnboardingFeature()
-        }
-
-        Scope(state: \.alarmList, action: \.alarmList) {
-            AlarmListFeature()
-        }
-
-        Scope(state: \.settings, action: \.settings) {
-            SettingsFeature()
-        }
-    }
-}
-
-struct AppFeatureView: View {
-    let store: StoreOf<AppFeature>
-
-    var body: some View {
-        let _ = print("[AppView] body rendered - needsOnboarding: \(store.needsOnboarding)")
-        return NavigationStack {
-            if store.needsOnboarding {
-                OnboardingFeatureView(
-                    store: store.scope(state: \.onboarding, action: \.onboarding)
-                )
-                .onChange(of: store.needsOnboarding) { oldValue, newValue in
-                    print("[AppView] needsOnboarding changed: \(oldValue) -> \(newValue)")
-                }
-            } else {
-                TabView(selection: Binding(
-                    get: { store.tab },
-                    set: { store.send(.setTab($0)) }
-                )) {
-                    AlarmListFeatureView(
-                        store: store.scope(state: \.alarmList, action: \.alarmList)
-                    )
-                    .tabItem { Label("アラーム", systemImage: "alarm") }
-                    .tag(AppFeature.State.Tab.alarms)
-
-                    SettingsFeatureView(
-                        store: store.scope(state: \.settings, action: \.settings)
-                    )
-                    .tabItem { Label("設定", systemImage: "gear") }
-                    .tag(AppFeature.State.Tab.settings)
-                }
-            }
-        }
-        .sheet(isPresented: Binding(
-                get: { store.ringing != nil },
-                set: { if !$0 { store.send(.dismissRinging) } }
-            )) {
-                if let ringingState = store.ringing {
-                    RingingFeatureView(store: Store(
-                        initialState: ringingState,
-                        reducer: { RingingFeature() }
-                    ))
-                    .presentationDetents([.large])
-                }
-            }
-        .sheet(isPresented: Binding(
-                get: { store.alarmEdit != nil },
-                set: { if !$0 { store.send(.dismissAlarmEdit) } }
-            )) {
-                if let alarmEditState = store.alarmEdit {
-                    AlarmEditFeatureView(store: Store(
-                        initialState: alarmEditState,
-                        reducer: { AlarmEditFeature() }
-                    ))
-                    .presentationDetents([.large])
-                }
-            }
-        .sheet(isPresented: Binding(
-                get: { store.characterSelect != nil },
-                set: { if !$0 { store.send(.dismissCharacterSelect) } }
-            )) {
-                if let characterSelectState = store.characterSelect {
-                    CharacterSelectFeatureView(store: Store(
-                        initialState: characterSelectState,
-                        reducer: { CharacterSelectFeature() }
-                    ))
-                    .presentationDetents([.medium, .large])
-                }
-            }
-        .onOpenURL { url in
-            store.send(.handleDeepLink(url))
-        }
-        .task {
-            await store.send(.onAppear).finish()
-        }
-    }
-}
-
-extension StoreOf<AppFeature> {
-    // Route binding removed - use actions to modify route instead
-}
-
-// MARK: - Route Bindings
-
-extension Binding {
-    func `case`<Enum, Case>(_ casePath: AnyCasePath<Enum, Case>) -> Binding<Case?> where Value == Enum? {
-        Binding<Case?>(
-            get: {
-                guard let enumValue = self.wrappedValue,
-                      let caseValue = casePath.extract(from: enumValue) else {
-                    return nil
-                }
-                return caseValue
-            },
-            set: { newValue in
-                if let newValue = newValue {
-                    self.wrappedValue = casePath.embed(newValue)
-                } else {
-                    self.wrappedValue = nil
-                }
-            }
-        )
+        Scope(state: \.onboarding, action: \.onboarding) { OnboardingFeature() }
+        Scope(state: \.alarmList, action: \.alarmList) { AlarmListFeature() }
+        Scope(state: \.myLibrary, action: \.myLibrary) { MyLibraryFeature() }
+        Scope(state: \.community, action: \.community) { CommunityFeature() }
+        Scope(state: \.settings, action: \.settings) { SettingsFeature() }
     }
 }

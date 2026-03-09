@@ -7,18 +7,47 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04C1B1B96FD3B7073D97A01D /* ClipEditorFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCA9B70E0996F3EC117A3A8 /* ClipEditorFeature.swift */; };
+		058DF0FCE33D24663D475AC1 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AE70FEB1D46C4E1D222562 /* OnboardingView.swift */; };
+		070B0A7B22791874DD631FC1 /* AlarmDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 157B5B0C667D5F8E24F598DD /* AlarmDetailView.swift */; };
+		0C050FCC3DEC3DF0E0A127EA /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2077C9CC99287F1507751D4 /* SettingsView.swift */; };
+		0E55203A2097723C8FE51AC0 /* AlarmDetailFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B0914479F352F90F548D50 /* AlarmDetailFeature.swift */; };
+		1CCB34C6BB45BA64C7EDD91F /* VideoClipClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA56136324F221143F53907 /* VideoClipClient.swift */; };
+		1EF19DA5ECD22355711E7452 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = EC241889871E46A899B84CD9 /* Supabase */; };
 		2345C9D7913E2F3A27B15926 /* AlarmListFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = A038ED79E6D1189C5CC40B5B /* AlarmListFeature.swift */; };
-		29FFC54FD5CCB72E12E14380 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275BB3FAE9D7702DA08FC2E3 /* Models.swift */; };
+		23EB690989AE7F2682A9F173 /* SupabaseClipClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4976FE07CC4E6F3911C3DBB5 /* SupabaseClipClient.swift */; };
+		243223A99E5E00F2F1C2164F /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEA6A731A047DD2FDE258AA /* Alarm.swift */; };
+		2C2E0CD51DA29633888050B9 /* AlarmEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2C7957DED76A3940D6DFEDA /* AlarmEditView.swift */; };
+		3440FB7B25815B328EE31EEA /* MyLibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69B37ABAD8D1BB7DB704D097 /* MyLibraryView.swift */; };
 		350B28374307B7E80E5EF550 /* utoutoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0237063394740AE9B6D19 /* utoutoApp.swift */; };
+		377050FBBF640B6074E9704C /* SupabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD92B334BEA120119B580D64 /* SupabaseService.swift */; };
 		45CCAC9A3336E7C0FF479842 /* OnboardingFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2063C05DE08EA5E29DFFC4 /* OnboardingFeature.swift */; };
-		4F1BA11747B88AB1C1A50ECE /* CharacterSelectFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A698D2DD86F05C75775EB7A /* CharacterSelectFeature.swift */; };
+		5041B61110FD368E832C301F /* CommunityClip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF658B6DF75CFB9F95219A1 /* CommunityClip.swift */; };
+		559F03EDB336B0306A69A50F /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B2145E46F4927B8A2D3F32 /* Settings.swift */; };
+		56113B05AE776BB74BDF25A0 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28B34B99905162F1C348FAE /* AppView.swift */; };
+		585C685B289B3DE7020CF99B /* LoggerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BCB7001EDB7DFD88C0DA7B /* LoggerClient.swift */; };
+		5A574807ACC57DC09556AEB8 /* MyLibraryFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A38059C7D0B396B8756F9 /* MyLibraryFeature.swift */; };
+		60CC75717F83AC7EC73814D3 /* CommunityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C02F6E225BE21FDFCCE1A5F /* CommunityView.swift */; };
+		68C5B5D05CF607A2CC93C047 /* ClockClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A1EFA962AF23B2C55AF6818 /* ClockClient.swift */; };
+		68DC87DF6173400018DF1F5B /* VideoTrimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B7D0A64B6E0DFC8A0885C5 /* VideoTrimmerView.swift */; };
+		742393E7EE64D89DB4B07D39 /* CommunityFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B067429D18452B3A6085AF38 /* CommunityFeature.swift */; };
 		7934954B7178C462759E2416 /* AlarmEditFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19ECBD5A8A429B0CC39B392 /* AlarmEditFeature.swift */; };
+		85BEF47FA10A62BB090B18F8 /* AlarmLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1BB33ECE53C11F80CB197 /* AlarmLog.swift */; };
 		8D7FE98001981EEB7C0A6CF5 /* SettingsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD477A4DDF77B4A2B345873C /* SettingsFeature.swift */; };
+		94B7E0854F37B8FFE639EFE3 /* AlarmRepositoryClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E465C8A1BB8A856537568490 /* AlarmRepositoryClient.swift */; };
+		A6BC4F29277D8028DB173A49 /* AppRouterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057C3E7597688A1588517494 /* AppRouterClient.swift */; };
+		AA169A16D495E76EFF28FA22 /* RingingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1EBE23FDC9E1A5C37033C /* RingingView.swift */; };
+		B551BF79423BF6028CA3F39D /* HapticClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF76A6753489F501C952627 /* HapticClient.swift */; };
 		BD9BB17246E4EDB38DCC5236 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE0289C2BE74C9EB3567F26 /* Tests.swift */; };
 		C4846901CB849FFA2AF0FFC0 /* Clients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74104FD7AFF956A0B51E0CE1 /* Clients.swift */; };
 		CFFB328492256936AFD3A201 /* RingingFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8C6F9B8BFB3DD7E9BE8C0C /* RingingFeature.swift */; };
+		D47DC6BB249F16C582E63598 /* AudioClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00428519F7264590E326C0F1 /* AudioClient.swift */; };
+		D8DA7CCFB5158AC18DC62724 /* ClipEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D575A89F4B97F4901E40267E /* ClipEditorView.swift */; };
+		DA74E0E6C49C8EEE8AE7549D /* NotificationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DBFD17A10B30A875D4B557 /* NotificationClient.swift */; };
 		F59E8EC8A9617D2A9213D035 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 679893785E642B5D2C5DC756 /* ComposableArchitecture */; };
+		F731F69223DBE47CF998FDEE /* AlarmListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD2352640CE3F597555D4BC /* AlarmListView.swift */; };
 		FF013366F6E1E86767369DC6 /* AppFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259ADA0F1F402A54B9D62142 /* AppFeature.swift */; };
+		FFB2DC7B61E90FA6C5E3CD4A /* VideoClip.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3BE1C37E13B24F1097A290 /* VideoClip.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,20 +84,48 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		00428519F7264590E326C0F1 /* AudioClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioClient.swift; sourceTree = "<group>"; };
+		057C3E7597688A1588517494 /* AppRouterClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouterClient.swift; sourceTree = "<group>"; };
+		157B5B0C667D5F8E24F598DD /* AlarmDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmDetailView.swift; sourceTree = "<group>"; };
 		15BB68EB1ED9A93303078B18 /* UtoutoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UtoutoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C02F6E225BE21FDFCCE1A5F /* CommunityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityView.swift; sourceTree = "<group>"; };
 		259ADA0F1F402A54B9D62142 /* AppFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFeature.swift; sourceTree = "<group>"; };
-		275BB3FAE9D7702DA08FC2E3 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		3A698D2DD86F05C75775EB7A /* CharacterSelectFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterSelectFeature.swift; sourceTree = "<group>"; };
+		2CEA6A731A047DD2FDE258AA /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
+		3A1EFA962AF23B2C55AF6818 /* ClockClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClockClient.swift; sourceTree = "<group>"; };
+		3AF1EBE23FDC9E1A5C37033C /* RingingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingingView.swift; sourceTree = "<group>"; };
+		3CCA9B70E0996F3EC117A3A8 /* ClipEditorFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipEditorFeature.swift; sourceTree = "<group>"; };
+		3FF658B6DF75CFB9F95219A1 /* CommunityClip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityClip.swift; sourceTree = "<group>"; };
+		4976FE07CC4E6F3911C3DBB5 /* SupabaseClipClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseClipClient.swift; sourceTree = "<group>"; };
+		4CA56136324F221143F53907 /* VideoClipClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoClipClient.swift; sourceTree = "<group>"; };
 		4F8C6F9B8BFB3DD7E9BE8C0C /* RingingFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingingFeature.swift; sourceTree = "<group>"; };
+		52B7D0A64B6E0DFC8A0885C5 /* VideoTrimmerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTrimmerView.swift; sourceTree = "<group>"; };
+		52DBFD17A10B30A875D4B557 /* NotificationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationClient.swift; sourceTree = "<group>"; };
+		57BCB7001EDB7DFD88C0DA7B /* LoggerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerClient.swift; sourceTree = "<group>"; };
+		69B37ABAD8D1BB7DB704D097 /* MyLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryView.swift; sourceTree = "<group>"; };
 		6D2063C05DE08EA5E29DFFC4 /* OnboardingFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFeature.swift; sourceTree = "<group>"; };
 		6F50CA5125178C76826EF62B /* UtoutoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "UtoutoTests-Info.plist"; sourceTree = "<group>"; };
+		6FC1BB33ECE53C11F80CB197 /* AlarmLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmLog.swift; sourceTree = "<group>"; };
+		72AE70FEB1D46C4E1D222562 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		74104FD7AFF956A0B51E0CE1 /* Clients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clients.swift; sourceTree = "<group>"; };
 		766C140117BB0943C0F407AF /* Utouto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Utouto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BE0289C2BE74C9EB3567F26 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		82B2145E46F4927B8A2D3F32 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		8AE0237063394740AE9B6D19 /* utoutoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utoutoApp.swift; sourceTree = "<group>"; };
+		92B0914479F352F90F548D50 /* AlarmDetailFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmDetailFeature.swift; sourceTree = "<group>"; };
 		A038ED79E6D1189C5CC40B5B /* AlarmListFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmListFeature.swift; sourceTree = "<group>"; };
 		A6B392893F11B6144EC6FEEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		AB3BE1C37E13B24F1097A290 /* VideoClip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoClip.swift; sourceTree = "<group>"; };
+		AF4A38059C7D0B396B8756F9 /* MyLibraryFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryFeature.swift; sourceTree = "<group>"; };
+		B067429D18452B3A6085AF38 /* CommunityFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityFeature.swift; sourceTree = "<group>"; };
+		BD92B334BEA120119B580D64 /* SupabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseService.swift; sourceTree = "<group>"; };
+		C2C7957DED76A3940D6DFEDA /* AlarmEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmEditView.swift; sourceTree = "<group>"; };
+		CCF76A6753489F501C952627 /* HapticClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticClient.swift; sourceTree = "<group>"; };
+		D28B34B99905162F1C348FAE /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		D575A89F4B97F4901E40267E /* ClipEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipEditorView.swift; sourceTree = "<group>"; };
+		E2077C9CC99287F1507751D4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		E465C8A1BB8A856537568490 /* AlarmRepositoryClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRepositoryClient.swift; sourceTree = "<group>"; };
 		F19ECBD5A8A429B0CC39B392 /* AlarmEditFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmEditFeature.swift; sourceTree = "<group>"; };
+		FCD2352640CE3F597555D4BC /* AlarmListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmListView.swift; sourceTree = "<group>"; };
 		FD477A4DDF77B4A2B345873C /* SettingsFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsFeature.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +135,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F59E8EC8A9617D2A9213D035 /* ComposableArchitecture in Frameworks */,
+				1EF19DA5ECD22355711E7452 /* Supabase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,10 +161,20 @@
 			path = Utouto;
 			sourceTree = "<group>";
 		};
+		1B447954FCE27C55BDBD594C /* MyLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				AF4A38059C7D0B396B8756F9 /* MyLibraryFeature.swift */,
+				69B37ABAD8D1BB7DB704D097 /* MyLibraryView.swift */,
+			);
+			path = MyLibrary;
+			sourceTree = "<group>";
+		};
 		253A761E680E14806F89AC8F /* AlarmEdit */ = {
 			isa = PBXGroup;
 			children = (
 				F19ECBD5A8A429B0CC39B392 /* AlarmEditFeature.swift */,
+				C2C7957DED76A3940D6DFEDA /* AlarmEditView.swift */,
 			);
 			path = AlarmEdit;
 			sourceTree = "<group>";
@@ -117,12 +185,24 @@
 				253A761E680E14806F89AC8F /* AlarmEdit */,
 				8867E5BB1A632E146151325D /* AlarmList */,
 				9E01EEA26D326ACC39ED39BB /* App */,
-				C0C8A3894E15ED1F09FA523F /* CharacterSelect */,
+				44EFB177FE6262AB2FF4FEF0 /* ClipEditor */,
+				937AFC96B8CA651E53C387CE /* Community */,
+				1B447954FCE27C55BDBD594C /* MyLibrary */,
 				DCE726BD2A4E09D803F5804C /* Onboarding */,
 				F98C4049CA77924B652D8057 /* Ringing */,
 				9E0F9EB607FD91B31CB9F795 /* Settings */,
 			);
 			path = Features;
+			sourceTree = "<group>";
+		};
+		44EFB177FE6262AB2FF4FEF0 /* ClipEditor */ = {
+			isa = PBXGroup;
+			children = (
+				3CCA9B70E0996F3EC117A3A8 /* ClipEditorFeature.swift */,
+				D575A89F4B97F4901E40267E /* ClipEditorView.swift */,
+				52B7D0A64B6E0DFC8A0885C5 /* VideoTrimmerView.swift */,
+			);
+			path = ClipEditor;
 			sourceTree = "<group>";
 		};
 		667BB8C29D224BA430D7F19D /* UtoutoTests */ = {
@@ -144,7 +224,10 @@
 		8867E5BB1A632E146151325D /* AlarmList */ = {
 			isa = PBXGroup;
 			children = (
+				92B0914479F352F90F548D50 /* AlarmDetailFeature.swift */,
+				157B5B0C667D5F8E24F598DD /* AlarmDetailView.swift */,
 				A038ED79E6D1189C5CC40B5B /* AlarmListFeature.swift */,
+				FCD2352640CE3F597555D4BC /* AlarmListView.swift */,
 			);
 			path = AlarmList;
 			sourceTree = "<group>";
@@ -159,10 +242,20 @@
 			name = Project;
 			sourceTree = "<group>";
 		};
+		937AFC96B8CA651E53C387CE /* Community */ = {
+			isa = PBXGroup;
+			children = (
+				B067429D18452B3A6085AF38 /* CommunityFeature.swift */,
+				1C02F6E225BE21FDFCCE1A5F /* CommunityView.swift */,
+			);
+			path = Community;
+			sourceTree = "<group>";
+		};
 		9E01EEA26D326ACC39ED39BB /* App */ = {
 			isa = PBXGroup;
 			children = (
 				259ADA0F1F402A54B9D62142 /* AppFeature.swift */,
+				D28B34B99905162F1C348FAE /* AppView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -171,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				FD477A4DDF77B4A2B345873C /* SettingsFeature.swift */,
+				E2077C9CC99287F1507751D4 /* SettingsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -191,18 +285,20 @@
 			path = InfoPlists;
 			sourceTree = "<group>";
 		};
-		C0C8A3894E15ED1F09FA523F /* CharacterSelect */ = {
-			isa = PBXGroup;
-			children = (
-				3A698D2DD86F05C75775EB7A /* CharacterSelectFeature.swift */,
-			);
-			path = CharacterSelect;
-			sourceTree = "<group>";
-		};
 		C48F8014D1BEBBCC2766E3CC /* Clients */ = {
 			isa = PBXGroup;
 			children = (
+				E465C8A1BB8A856537568490 /* AlarmRepositoryClient.swift */,
+				057C3E7597688A1588517494 /* AppRouterClient.swift */,
+				00428519F7264590E326C0F1 /* AudioClient.swift */,
 				74104FD7AFF956A0B51E0CE1 /* Clients.swift */,
+				3A1EFA962AF23B2C55AF6818 /* ClockClient.swift */,
+				CCF76A6753489F501C952627 /* HapticClient.swift */,
+				57BCB7001EDB7DFD88C0DA7B /* LoggerClient.swift */,
+				52DBFD17A10B30A875D4B557 /* NotificationClient.swift */,
+				4976FE07CC4E6F3911C3DBB5 /* SupabaseClipClient.swift */,
+				BD92B334BEA120119B580D64 /* SupabaseService.swift */,
+				4CA56136324F221143F53907 /* VideoClipClient.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -219,7 +315,11 @@
 		D0A1B08684478A7CCEA5E279 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				275BB3FAE9D7702DA08FC2E3 /* Models.swift */,
+				2CEA6A731A047DD2FDE258AA /* Alarm.swift */,
+				6FC1BB33ECE53C11F80CB197 /* AlarmLog.swift */,
+				3FF658B6DF75CFB9F95219A1 /* CommunityClip.swift */,
+				82B2145E46F4927B8A2D3F32 /* Settings.swift */,
+				AB3BE1C37E13B24F1097A290 /* VideoClip.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -236,6 +336,7 @@
 			isa = PBXGroup;
 			children = (
 				6D2063C05DE08EA5E29DFFC4 /* OnboardingFeature.swift */,
+				72AE70FEB1D46C4E1D222562 /* OnboardingView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -244,6 +345,7 @@
 			isa = PBXGroup;
 			children = (
 				4F8C6F9B8BFB3DD7E9BE8C0C /* RingingFeature.swift */,
+				3AF1EBE23FDC9E1A5C37033C /* RingingView.swift */,
 			);
 			path = Ringing;
 			sourceTree = "<group>";
@@ -275,6 +377,7 @@
 			name = Utouto;
 			packageProductDependencies = (
 				679893785E642B5D2C5DC756 /* ComposableArchitecture */,
+				EC241889871E46A899B84CD9 /* Supabase */,
 			);
 			productName = Utouto;
 			productReference = 766C140117BB0943C0F407AF /* Utouto.app */;
@@ -325,6 +428,7 @@
 			mainGroup = D77E4E42A8C6DB879B97EE09;
 			packageReferences = (
 				1CA2EA64AE60931B2393AA14 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+				A52952C5C203FF959463AEAB /* XCRemoteSwiftPackageReference "supabase-swift" */,
 			);
 			productRefGroup = CBECF9F976B4E27B1FCE7F67 /* Products */;
 			projectDirPath = "";
@@ -358,15 +462,43 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94B7E0854F37B8FFE639EFE3 /* AlarmRepositoryClient.swift in Sources */,
+				A6BC4F29277D8028DB173A49 /* AppRouterClient.swift in Sources */,
+				D47DC6BB249F16C582E63598 /* AudioClient.swift in Sources */,
 				C4846901CB849FFA2AF0FFC0 /* Clients.swift in Sources */,
+				68C5B5D05CF607A2CC93C047 /* ClockClient.swift in Sources */,
+				B551BF79423BF6028CA3F39D /* HapticClient.swift in Sources */,
+				585C685B289B3DE7020CF99B /* LoggerClient.swift in Sources */,
+				DA74E0E6C49C8EEE8AE7549D /* NotificationClient.swift in Sources */,
+				23EB690989AE7F2682A9F173 /* SupabaseClipClient.swift in Sources */,
+				377050FBBF640B6074E9704C /* SupabaseService.swift in Sources */,
+				1CCB34C6BB45BA64C7EDD91F /* VideoClipClient.swift in Sources */,
 				7934954B7178C462759E2416 /* AlarmEditFeature.swift in Sources */,
+				2C2E0CD51DA29633888050B9 /* AlarmEditView.swift in Sources */,
+				0E55203A2097723C8FE51AC0 /* AlarmDetailFeature.swift in Sources */,
+				070B0A7B22791874DD631FC1 /* AlarmDetailView.swift in Sources */,
 				2345C9D7913E2F3A27B15926 /* AlarmListFeature.swift in Sources */,
+				F731F69223DBE47CF998FDEE /* AlarmListView.swift in Sources */,
 				FF013366F6E1E86767369DC6 /* AppFeature.swift in Sources */,
-				4F1BA11747B88AB1C1A50ECE /* CharacterSelectFeature.swift in Sources */,
+				56113B05AE776BB74BDF25A0 /* AppView.swift in Sources */,
+				04C1B1B96FD3B7073D97A01D /* ClipEditorFeature.swift in Sources */,
+				D8DA7CCFB5158AC18DC62724 /* ClipEditorView.swift in Sources */,
+				68DC87DF6173400018DF1F5B /* VideoTrimmerView.swift in Sources */,
+				742393E7EE64D89DB4B07D39 /* CommunityFeature.swift in Sources */,
+				60CC75717F83AC7EC73814D3 /* CommunityView.swift in Sources */,
+				5A574807ACC57DC09556AEB8 /* MyLibraryFeature.swift in Sources */,
+				3440FB7B25815B328EE31EEA /* MyLibraryView.swift in Sources */,
 				45CCAC9A3336E7C0FF479842 /* OnboardingFeature.swift in Sources */,
+				058DF0FCE33D24663D475AC1 /* OnboardingView.swift in Sources */,
 				CFFB328492256936AFD3A201 /* RingingFeature.swift in Sources */,
+				AA169A16D495E76EFF28FA22 /* RingingView.swift in Sources */,
 				8D7FE98001981EEB7C0A6CF5 /* SettingsFeature.swift in Sources */,
-				29FFC54FD5CCB72E12E14380 /* Models.swift in Sources */,
+				0C050FCC3DEC3DF0E0A127EA /* SettingsView.swift in Sources */,
+				243223A99E5E00F2F1C2164F /* Alarm.swift in Sources */,
+				85BEF47FA10A62BB090B18F8 /* AlarmLog.swift in Sources */,
+				5041B61110FD368E832C301F /* CommunityClip.swift in Sources */,
+				559F03EDB336B0306A69A50F /* Settings.swift in Sources */,
+				FFB2DC7B61E90FA6C5E3CD4A /* VideoClip.swift in Sources */,
 				350B28374307B7E80E5EF550 /* utoutoApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -404,6 +536,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-L$(DT_TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.utouto;
 				PRODUCT_NAME = Utouto;
 				SDKROOT = iphoneos;
@@ -432,6 +568,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-L$(DT_TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.utouto.tests;
 				PRODUCT_NAME = UtoutoTests;
@@ -463,6 +603,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-L$(DT_TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.utouto.tests;
 				PRODUCT_NAME = UtoutoTests;
@@ -548,6 +692,10 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-L$(DT_TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.utouto;
 				PRODUCT_NAME = Utouto;
@@ -666,12 +814,24 @@
 				minimumVersion = 1.10.0;
 			};
 		};
+		A52952C5C203FF959463AEAB /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		679893785E642B5D2C5DC756 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ComposableArchitecture;
+		};
+		EC241889871E46A899B84CD9 /* Supabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Supabase;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
