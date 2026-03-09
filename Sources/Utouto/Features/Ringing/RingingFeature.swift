@@ -9,6 +9,7 @@ struct RingingFeature {
         let alarmId: UUID
         var alarm: Alarm?
         var clip: VideoClip?
+        var videoFileURL: URL?        // ループ再生する動画ファイルURL（存在すれば）
         var currentTime = Date()
         var wakeText: String = ""
         var isPlaying = false
@@ -33,7 +34,6 @@ struct RingingFeature {
         case alarmResponse(Alarm?)
         case clipResponse(VideoClip?)
         case updateTime
-        case playWakeSound
         case snooze
         case dismiss
         case stopAudio
@@ -56,9 +56,10 @@ struct RingingFeature {
         Reduce { state, action in
             switch action {
             case .onAppear:
+                state.isPlaying = true
+                haptic.notification(.warning)
                 return .merge(
                     .send(.loadAlarm),
-                    .send(.playWakeSound),
                     .run { send in
                         while true {
                             try await Task.sleep(nanoseconds: 1_000_000_000)
@@ -66,6 +67,7 @@ struct RingingFeature {
                         }
                     }
                 )
+
             case .loadAlarm:
                 return .run { [alarmId = state.alarmId] send in
                     do {
@@ -82,25 +84,37 @@ struct RingingFeature {
                         await send(.alarmResponse(nil))
                     }
                 }
+
             case let .alarmResponse(alarm):
                 state.alarm = alarm
                 return .none
+
             case let .clipResponse(clip):
                 state.clip = clip
-                return .none
+                guard let clip else { return .none }
+
+                let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+                let vidURL = docs
+                    .appendingPathComponent("videos", isDirectory: true)
+                    .appendingPathComponent(clip.videoFilename)
+
+                if FileManager.default.fileExists(atPath: vidURL.path) {
+                    // 動画ファイルあり → LoopingVideoPlayerView が音声込みで再生
+                    state.videoFileURL = vidURL
+                    return .none
+                } else {
+                    // 動画なし → 音声のみフォールバック
+                    state.videoFileURL = nil
+                    let audioURL = docs
+                        .appendingPathComponent("clips", isDirectory: true)
+                        .appendingPathComponent(clip.audioFilename)
+                    return .run { _ in await audioClient.play(audioURL) }
+                }
+
             case .updateTime:
                 state.currentTime = clock.now()
                 return .none
-            case .playWakeSound:
-                state.isPlaying = true
-                haptic.notification(.warning)
-                return .run { [clip = state.clip] _ in
-                    if let clip = clip {
-                        let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-                        let url = docs.appendingPathComponent("clips").appendingPathComponent(clip.audioFilename)
-                        await audioClient.play(url)
-                    }
-                }
+
             case .snooze:
                 guard let alarm = state.alarm else { return .none }
                 state.snoozeCount += 1
@@ -123,6 +137,7 @@ struct RingingFeature {
                     },
                     .send(.delegate(.dismiss))
                 )
+
             case .dismiss:
                 haptic.notification(.success)
                 return .merge(
@@ -136,16 +151,20 @@ struct RingingFeature {
                     },
                     .send(.delegate(.dismiss))
                 )
+
             case .stopAudio:
                 state.isPlaying = false; return .none
+
             case let .longPressChanged(isPressing):
                 state.isLongPressing = isPressing
                 if !isPressing { state.longPressProgress = 0 }
                 return .none
+
             case let .longPressProgressUpdated(progress):
                 state.longPressProgress = progress
                 if progress >= 1.0 { return .send(.dismiss) }
                 return .none
+
             case .delegate: return .none
             }
         }

@@ -7,7 +7,8 @@ struct AppFeature {
     struct State {
         enum Tab: Hashable { case alarms, myLibrary, community, settings }
         var tab: Tab = .alarms
-        var needsOnboarding = true
+        var isCheckingAuth: Bool = true  // 起動時の権限確認中フラグ
+        var needsOnboarding = false
 
         var onboarding = OnboardingFeature.State()
         var alarmList = AlarmListFeature.State()
@@ -53,7 +54,9 @@ struct AppFeature {
                 }
 
             case let .setNeedsOnboarding(v):
-                state.needsOnboarding = v; return .none
+                state.needsOnboarding = v
+                state.isCheckingAuth = false  // 確認完了
+                return .none
 
             case let .handleDeepLink(url):
                 guard let comps = URLComponents(url: url, resolvingAgainstBaseURL: false),

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -32,6 +32,7 @@
 		68DC87DF6173400018DF1F5B /* VideoTrimmerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B7D0A64B6E0DFC8A0885C5 /* VideoTrimmerView.swift */; };
 		742393E7EE64D89DB4B07D39 /* CommunityFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = B067429D18452B3A6085AF38 /* CommunityFeature.swift */; };
 		7934954B7178C462759E2416 /* AlarmEditFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = F19ECBD5A8A429B0CC39B392 /* AlarmEditFeature.swift */; };
+		7C80AB02579995DA0BD52FF4 /* ClipDetailFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC93C5D91A3665FAF553B3ED /* ClipDetailFeature.swift */; };
 		85BEF47FA10A62BB090B18F8 /* AlarmLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC1BB33ECE53C11F80CB197 /* AlarmLog.swift */; };
 		8D7FE98001981EEB7C0A6CF5 /* SettingsFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD477A4DDF77B4A2B345873C /* SettingsFeature.swift */; };
 		94B7E0854F37B8FFE639EFE3 /* AlarmRepositoryClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E465C8A1BB8A856537568490 /* AlarmRepositoryClient.swift */; };
@@ -39,6 +40,7 @@
 		AA169A16D495E76EFF28FA22 /* RingingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1EBE23FDC9E1A5C37033C /* RingingView.swift */; };
 		B551BF79423BF6028CA3F39D /* HapticClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF76A6753489F501C952627 /* HapticClient.swift */; };
 		BD9BB17246E4EDB38DCC5236 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE0289C2BE74C9EB3567F26 /* Tests.swift */; };
+		C0003B9848114E1A4704730E /* ClipDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A848F33951B4DF155358AA /* ClipDetailView.swift */; };
 		C4846901CB849FFA2AF0FFC0 /* Clients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74104FD7AFF956A0B51E0CE1 /* Clients.swift */; };
 		CFFB328492256936AFD3A201 /* RingingFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8C6F9B8BFB3DD7E9BE8C0C /* RingingFeature.swift */; };
 		D47DC6BB249F16C582E63598 /* AudioClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00428519F7264590E326C0F1 /* AudioClient.swift */; };
@@ -107,6 +109,7 @@
 		6FC1BB33ECE53C11F80CB197 /* AlarmLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmLog.swift; sourceTree = "<group>"; };
 		72AE70FEB1D46C4E1D222562 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		74104FD7AFF956A0B51E0CE1 /* Clients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clients.swift; sourceTree = "<group>"; };
+		74A848F33951B4DF155358AA /* ClipDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipDetailView.swift; sourceTree = "<group>"; };
 		766C140117BB0943C0F407AF /* Utouto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Utouto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BE0289C2BE74C9EB3567F26 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		82B2145E46F4927B8A2D3F32 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -117,6 +120,7 @@
 		AB3BE1C37E13B24F1097A290 /* VideoClip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoClip.swift; sourceTree = "<group>"; };
 		AF4A38059C7D0B396B8756F9 /* MyLibraryFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryFeature.swift; sourceTree = "<group>"; };
 		B067429D18452B3A6085AF38 /* CommunityFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityFeature.swift; sourceTree = "<group>"; };
+		BC93C5D91A3665FAF553B3ED /* ClipDetailFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipDetailFeature.swift; sourceTree = "<group>"; };
 		BD92B334BEA120119B580D64 /* SupabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseService.swift; sourceTree = "<group>"; };
 		C2C7957DED76A3940D6DFEDA /* AlarmEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmEditView.swift; sourceTree = "<group>"; };
 		CCF76A6753489F501C952627 /* HapticClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticClient.swift; sourceTree = "<group>"; };
@@ -164,6 +168,8 @@
 		1B447954FCE27C55BDBD594C /* MyLibrary */ = {
 			isa = PBXGroup;
 			children = (
+				BC93C5D91A3665FAF553B3ED /* ClipDetailFeature.swift */,
+				74A848F33951B4DF155358AA /* ClipDetailView.swift */,
 				AF4A38059C7D0B396B8756F9 /* MyLibraryFeature.swift */,
 				69B37ABAD8D1BB7DB704D097 /* MyLibraryView.swift */,
 			);
@@ -486,6 +492,8 @@
 				68DC87DF6173400018DF1F5B /* VideoTrimmerView.swift in Sources */,
 				742393E7EE64D89DB4B07D39 /* CommunityFeature.swift in Sources */,
 				60CC75717F83AC7EC73814D3 /* CommunityView.swift in Sources */,
+				7C80AB02579995DA0BD52FF4 /* ClipDetailFeature.swift in Sources */,
+				C0003B9848114E1A4704730E /* ClipDetailView.swift in Sources */,
 				5A574807ACC57DC09556AEB8 /* MyLibraryFeature.swift in Sources */,
 				3440FB7B25815B328EE31EEA /* MyLibraryView.swift in Sources */,
 				45CCAC9A3336E7C0FF479842 /* OnboardingFeature.swift in Sources */,
@@ -529,6 +537,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Sources/Utouto/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -546,10 +555,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.9;
@@ -579,10 +585,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = (
-					"$(inherited)",
-					DEBUG,
-				);
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) DEBUG";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -686,6 +689,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Sources/Utouto/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;

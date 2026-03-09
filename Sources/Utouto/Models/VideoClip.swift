@@ -16,4 +16,7 @@ struct VideoClip: Identifiable, Codable, Equatable {
         let d = Int(durationSec)
         return String(format: "%d:%02d", d / 60, d % 60)
     }
+
+    /// トリム済み動画ファイル名（Documents/videos/ 以下）
+    var videoFilename: String { "\(id.uuidString).mp4" }
 }

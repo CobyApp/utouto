@@ -91,6 +91,8 @@ struct ClipEditorFeature {
                         let clipId = UUID()
                         let audioURL = try await videoClipClient.trimAudio(url, s, e, clipId)
                         let thumbURL = try await videoClipClient.generateThumbnail(url, s)
+                        // 動画もトリム（失敗しても保存は続行）
+                        let _ = await videoClipClient.trimVideo(url, s, e, clipId)
                         let clip = VideoClip(
                             id: clipId, title: title,
                             sourceVideoFilename: url.lastPathComponent,

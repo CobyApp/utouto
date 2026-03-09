@@ -13,8 +13,9 @@ private struct VideoFileTransferable: Transferable {
         FileRepresentation(contentType: .movie) { video in
             SentTransferredFile(video.url)
         } importing: { received in
+            let ext = received.file.pathExtension.isEmpty ? "mov" : received.file.pathExtension
             let dest = FileManager.default.temporaryDirectory
-                .appendingPathComponent(UUID().uuidString + "." + received.file.pathExtension)
+                .appendingPathComponent(UUID().uuidString + "." + ext)
             if FileManager.default.fileExists(atPath: dest.path) {
                 try FileManager.default.removeItem(at: dest)
             }
@@ -194,7 +195,23 @@ struct ClipEditorView: View {
                     .disabled(!store.canSave || store.isSaving)
                 }
                 .padding(.horizontal)
-                .padding(.bottom, 32)
+
+                // エラーメッセージ表示
+                if let msg = store.errorMessage {
+                    HStack(spacing: 6) {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                        Text(msg)
+                            .font(.caption)
+                    }
+                    .foregroundStyle(.red)
+                    .padding(.horizontal, 16).padding(.vertical, 10)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(Color.red.opacity(0.08))
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .padding(.horizontal)
+                }
+
+                Spacer().frame(height: 32)
             }
             .padding(.top, 16)
         }
