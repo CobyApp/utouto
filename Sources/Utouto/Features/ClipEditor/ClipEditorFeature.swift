@@ -1,6 +1,5 @@
 import Foundation
 import SwiftUI
-import AVFoundation
 import PhotosUI
 import ComposableArchitecture
 
@@ -42,6 +41,7 @@ struct ClipEditorFeature {
     }
 
     @Dependency(\.videoClipClient) var videoClipClient
+    @Dependency(\.mediaMetadataClient) var mediaMetadataClient
     @Dependency(\.audioClient) var audioClient
     @Dependency(\.haptic) var haptic
 
@@ -53,9 +53,8 @@ struct ClipEditorFeature {
                 state.selectedVideoURL = url
                 state.step = .editTimeline
                 return .run { send in
-                    let asset = AVURLAsset(url: url)
-                    let duration = try await asset.load(.duration)
-                    await send(.videoMetadataLoaded(duration: duration.seconds))
+                    let duration = try await mediaMetadataClient.loadVideoDuration(url)
+                    await send(.videoMetadataLoaded(duration: duration))
                 }
             case let .videoMetadataLoaded(duration):
                 state.videoDuration = duration

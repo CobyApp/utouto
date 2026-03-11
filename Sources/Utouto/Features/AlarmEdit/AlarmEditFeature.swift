@@ -63,7 +63,7 @@ struct AlarmEditFeature {
     }
 
     @Dependency(\.alarmRepository) var alarmRepository
-    @Dependency(\.notificationClient) var notificationClient
+    @Dependency(\.alarmKitClient) var alarmKitClient
     @Dependency(\.videoClipClient) var videoClipClient
     @Dependency(\.clock) var clock
 
@@ -108,7 +108,7 @@ struct AlarmEditFeature {
                     do {
                         if isNew { try await alarmRepository.saveAlarm(a) }
                         else { try await alarmRepository.updateAlarm(a) }
-                        try await notificationClient.scheduleAlarm(a, audioURL)
+                        try await alarmKitClient.scheduleAlarm(a, audioURL)
                         await send(.saveResponse)
                         await send(.delegate(.saveAlarm(a)))
                     } catch { print("Save error: \(error)") }

@@ -24,6 +24,7 @@
 		45CCAC9A3336E7C0FF479842 /* OnboardingFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D2063C05DE08EA5E29DFFC4 /* OnboardingFeature.swift */; };
 		5041B61110FD368E832C301F /* CommunityClip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FF658B6DF75CFB9F95219A1 /* CommunityClip.swift */; };
 		559F03EDB336B0306A69A50F /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82B2145E46F4927B8A2D3F32 /* Settings.swift */; };
+		55BDA3DAFC4D6F08A43DF7CE /* MediaMetadataClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5784CE19687C5CB15E8FED60 /* MediaMetadataClient.swift */; };
 		56113B05AE776BB74BDF25A0 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28B34B99905162F1C348FAE /* AppView.swift */; };
 		585C685B289B3DE7020CF99B /* LoggerClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BCB7001EDB7DFD88C0DA7B /* LoggerClient.swift */; };
 		5A574807ACC57DC09556AEB8 /* MyLibraryFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF4A38059C7D0B396B8756F9 /* MyLibraryFeature.swift */; };
@@ -39,13 +40,15 @@
 		A6BC4F29277D8028DB173A49 /* AppRouterClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057C3E7597688A1588517494 /* AppRouterClient.swift */; };
 		AA169A16D495E76EFF28FA22 /* RingingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF1EBE23FDC9E1A5C37033C /* RingingView.swift */; };
 		B551BF79423BF6028CA3F39D /* HapticClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCF76A6753489F501C952627 /* HapticClient.swift */; };
+		BD84AC412D94F183B3E00530 /* FileStorageClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435A5978570887104B5CDEEF /* FileStorageClient.swift */; };
 		BD9BB17246E4EDB38DCC5236 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BE0289C2BE74C9EB3567F26 /* Tests.swift */; };
 		C0003B9848114E1A4704730E /* ClipDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74A848F33951B4DF155358AA /* ClipDetailView.swift */; };
 		C4846901CB849FFA2AF0FFC0 /* Clients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74104FD7AFF956A0B51E0CE1 /* Clients.swift */; };
 		CFFB328492256936AFD3A201 /* RingingFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8C6F9B8BFB3DD7E9BE8C0C /* RingingFeature.swift */; };
 		D47DC6BB249F16C582E63598 /* AudioClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00428519F7264590E326C0F1 /* AudioClient.swift */; };
 		D8DA7CCFB5158AC18DC62724 /* ClipEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D575A89F4B97F4901E40267E /* ClipEditorView.swift */; };
-		DA74E0E6C49C8EEE8AE7549D /* NotificationClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52DBFD17A10B30A875D4B557 /* NotificationClient.swift */; };
+		E6C6535957384E162D6F4779 /* AlarmKitClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63194755843272992A26854 /* AlarmKitClient.swift */; };
+		F25893367A44B440F7A941F1 /* ClipImportClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9F4869BB133D623A5164B77 /* ClipImportClient.swift */; };
 		F59E8EC8A9617D2A9213D035 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = 679893785E642B5D2C5DC756 /* ComposableArchitecture */; };
 		F731F69223DBE47CF998FDEE /* AlarmListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD2352640CE3F597555D4BC /* AlarmListView.swift */; };
 		FF013366F6E1E86767369DC6 /* AppFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 259ADA0F1F402A54B9D62142 /* AppFeature.swift */; };
@@ -97,11 +100,12 @@
 		3AF1EBE23FDC9E1A5C37033C /* RingingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingingView.swift; sourceTree = "<group>"; };
 		3CCA9B70E0996F3EC117A3A8 /* ClipEditorFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipEditorFeature.swift; sourceTree = "<group>"; };
 		3FF658B6DF75CFB9F95219A1 /* CommunityClip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunityClip.swift; sourceTree = "<group>"; };
+		435A5978570887104B5CDEEF /* FileStorageClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileStorageClient.swift; sourceTree = "<group>"; };
 		4976FE07CC4E6F3911C3DBB5 /* SupabaseClipClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseClipClient.swift; sourceTree = "<group>"; };
 		4CA56136324F221143F53907 /* VideoClipClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoClipClient.swift; sourceTree = "<group>"; };
 		4F8C6F9B8BFB3DD7E9BE8C0C /* RingingFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingingFeature.swift; sourceTree = "<group>"; };
 		52B7D0A64B6E0DFC8A0885C5 /* VideoTrimmerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTrimmerView.swift; sourceTree = "<group>"; };
-		52DBFD17A10B30A875D4B557 /* NotificationClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationClient.swift; sourceTree = "<group>"; };
+		5784CE19687C5CB15E8FED60 /* MediaMetadataClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaMetadataClient.swift; sourceTree = "<group>"; };
 		57BCB7001EDB7DFD88C0DA7B /* LoggerClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggerClient.swift; sourceTree = "<group>"; };
 		69B37ABAD8D1BB7DB704D097 /* MyLibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLibraryView.swift; sourceTree = "<group>"; };
 		6D2063C05DE08EA5E29DFFC4 /* OnboardingFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFeature.swift; sourceTree = "<group>"; };
@@ -123,9 +127,11 @@
 		BC93C5D91A3665FAF553B3ED /* ClipDetailFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipDetailFeature.swift; sourceTree = "<group>"; };
 		BD92B334BEA120119B580D64 /* SupabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupabaseService.swift; sourceTree = "<group>"; };
 		C2C7957DED76A3940D6DFEDA /* AlarmEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmEditView.swift; sourceTree = "<group>"; };
+		C9F4869BB133D623A5164B77 /* ClipImportClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipImportClient.swift; sourceTree = "<group>"; };
 		CCF76A6753489F501C952627 /* HapticClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticClient.swift; sourceTree = "<group>"; };
 		D28B34B99905162F1C348FAE /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		D575A89F4B97F4901E40267E /* ClipEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipEditorView.swift; sourceTree = "<group>"; };
+		D63194755843272992A26854 /* AlarmKitClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmKitClient.swift; sourceTree = "<group>"; };
 		E2077C9CC99287F1507751D4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		E465C8A1BB8A856537568490 /* AlarmRepositoryClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmRepositoryClient.swift; sourceTree = "<group>"; };
 		F19ECBD5A8A429B0CC39B392 /* AlarmEditFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmEditFeature.swift; sourceTree = "<group>"; };
@@ -294,14 +300,17 @@
 		C48F8014D1BEBBCC2766E3CC /* Clients */ = {
 			isa = PBXGroup;
 			children = (
+				D63194755843272992A26854 /* AlarmKitClient.swift */,
 				E465C8A1BB8A856537568490 /* AlarmRepositoryClient.swift */,
 				057C3E7597688A1588517494 /* AppRouterClient.swift */,
 				00428519F7264590E326C0F1 /* AudioClient.swift */,
 				74104FD7AFF956A0B51E0CE1 /* Clients.swift */,
+				C9F4869BB133D623A5164B77 /* ClipImportClient.swift */,
 				3A1EFA962AF23B2C55AF6818 /* ClockClient.swift */,
+				435A5978570887104B5CDEEF /* FileStorageClient.swift */,
 				CCF76A6753489F501C952627 /* HapticClient.swift */,
 				57BCB7001EDB7DFD88C0DA7B /* LoggerClient.swift */,
-				52DBFD17A10B30A875D4B557 /* NotificationClient.swift */,
+				5784CE19687C5CB15E8FED60 /* MediaMetadataClient.swift */,
 				4976FE07CC4E6F3911C3DBB5 /* SupabaseClipClient.swift */,
 				BD92B334BEA120119B580D64 /* SupabaseService.swift */,
 				4CA56136324F221143F53907 /* VideoClipClient.swift */,
@@ -468,14 +477,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E6C6535957384E162D6F4779 /* AlarmKitClient.swift in Sources */,
 				94B7E0854F37B8FFE639EFE3 /* AlarmRepositoryClient.swift in Sources */,
 				A6BC4F29277D8028DB173A49 /* AppRouterClient.swift in Sources */,
 				D47DC6BB249F16C582E63598 /* AudioClient.swift in Sources */,
 				C4846901CB849FFA2AF0FFC0 /* Clients.swift in Sources */,
+				F25893367A44B440F7A941F1 /* ClipImportClient.swift in Sources */,
 				68C5B5D05CF607A2CC93C047 /* ClockClient.swift in Sources */,
+				BD84AC412D94F183B3E00530 /* FileStorageClient.swift in Sources */,
 				B551BF79423BF6028CA3F39D /* HapticClient.swift in Sources */,
 				585C685B289B3DE7020CF99B /* LoggerClient.swift in Sources */,
-				DA74E0E6C49C8EEE8AE7549D /* NotificationClient.swift in Sources */,
+				55BDA3DAFC4D6F08A43DF7CE /* MediaMetadataClient.swift in Sources */,
 				23EB690989AE7F2682A9F173 /* SupabaseClipClient.swift in Sources */,
 				377050FBBF640B6074E9704C /* SupabaseService.swift in Sources */,
 				1CCB34C6BB45BA64C7EDD91F /* VideoClipClient.swift in Sources */,
@@ -540,14 +552,10 @@
 				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Sources/Utouto/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
-				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-L$(DT_TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.utouto;
 				PRODUCT_NAME = Utouto;
@@ -568,16 +576,13 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
 				INFOPLIST_FILE = "Derived/InfoPlists/UtoutoTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
-				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-L$(DT_TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.utouto.tests;
 				PRODUCT_NAME = UtoutoTests;
@@ -600,16 +605,13 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
 				INFOPLIST_FILE = "Derived/InfoPlists/UtoutoTests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
-				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-L$(DT_TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.utouto.tests;
 				PRODUCT_NAME = UtoutoTests;
@@ -660,12 +662,10 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = "";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -692,14 +692,10 @@
 				DEVELOPMENT_TEAM = 3Y8YH8GWMM;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Sources/Utouto/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
-				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-L$(DT_TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.utouto;
 				PRODUCT_NAME = Utouto;
@@ -748,12 +744,10 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = "";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;

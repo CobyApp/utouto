@@ -21,7 +21,7 @@ struct OnboardingFeature {
         case delegate(Delegate)
     }
 
-    @Dependency(\.notificationClient) var notificationClient
+    @Dependency(\.alarmKitClient) var alarmKitClient
     @Dependency(\.appRouter) var appRouter
     @Dependency(\.logger) var logger
 
@@ -33,7 +33,7 @@ struct OnboardingFeature {
                 logger.log("[Onboarding] Requesting authorization...")
                 return .run { send in
                     do {
-                        let granted = try await notificationClient.requestAuthorization()
+                        let granted = try await alarmKitClient.requestAuthorization()
                         logger.log("[Onboarding] Authorization response: \(granted)")
                         await send(.authorizationResponse(granted))
                     } catch {

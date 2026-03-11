@@ -1,6 +1,18 @@
 import Foundation
 import ComposableArchitecture
 
+// MARK: - AlarmRepositoryBackend (DIP: depend on abstraction for testability)
+protocol AlarmRepositoryBackend: Sendable {
+    func loadAlarms() async throws -> [Alarm]
+    func saveAlarm(_ alarm: Alarm) async throws
+    func updateAlarm(_ alarm: Alarm) async throws
+    func deleteAlarm(_ id: UUID) async throws
+    func loadSettings() async throws -> Settings
+    func saveSettings(_ s: Settings) async throws
+    func loadAlarmLogs() async throws -> [AlarmLog]
+    func saveAlarmLog(_ log: AlarmLog) async throws
+}
+
 struct AlarmRepositoryClient {
     var loadAlarms: @Sendable () async throws -> [Alarm]
     var saveAlarm: @Sendable (Alarm) async throws -> Void
@@ -10,21 +22,26 @@ struct AlarmRepositoryClient {
     var saveSettings: @Sendable (Settings) async throws -> Void
     var loadAlarmLogs: @Sendable () async throws -> [AlarmLog]
     var saveAlarmLog: @Sendable (AlarmLog) async throws -> Void
+
+    /// Build client with injectable backend (DIP: tests can pass a mock).
+    static func live(backend: AlarmRepositoryBackend) -> AlarmRepositoryClient {
+        AlarmRepositoryClient(
+            loadAlarms: { try await backend.loadAlarms() },
+            saveAlarm: { try await backend.saveAlarm($0) },
+            updateAlarm: { try await backend.updateAlarm($0) },
+            deleteAlarm: { try await backend.deleteAlarm($0) },
+            loadSettings: { try await backend.loadSettings() },
+            saveSettings: { try await backend.saveSettings($0) },
+            loadAlarmLogs: { try await backend.loadAlarmLogs() },
+            saveAlarmLog: { try await backend.saveAlarmLog($0) }
+        )
+    }
 }
 
 extension AlarmRepositoryClient: DependencyKey {
     static let liveValue: AlarmRepositoryClient = {
         let impl = AlarmRepositoryLive()
-        return AlarmRepositoryClient(
-            loadAlarms: { try await impl.loadAlarms() },
-            saveAlarm: { try await impl.saveAlarm($0) },
-            updateAlarm: { try await impl.updateAlarm($0) },
-            deleteAlarm: { try await impl.deleteAlarm($0) },
-            loadSettings: { try await impl.loadSettings() },
-            saveSettings: { try await impl.saveSettings($0) },
-            loadAlarmLogs: { try await impl.loadAlarmLogs() },
-            saveAlarmLog: { try await impl.saveAlarmLog($0) }
-        )
+        return AlarmRepositoryClient.live(backend: impl)
     }()
 }
 
@@ -35,7 +52,7 @@ extension DependencyValues {
     }
 }
 
-private actor AlarmRepositoryLive {
+private actor AlarmRepositoryLive: AlarmRepositoryBackend {
     private let fm = FileManager.default
     private let enc = JSONEncoder()
     private let dec = JSONDecoder()

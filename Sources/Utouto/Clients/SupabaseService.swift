@@ -1,11 +1,21 @@
 import Foundation
 import Supabase
 
+// MARK: - SupabaseClipBackend (DIP: depend on abstraction for testability)
+protocol SupabaseClipBackend: AnyObject, Sendable {
+    func fetchClips(page: Int) async throws -> [CommunityClip]
+    func uploadClip(_ clip: VideoClip, audioData: Data, thumbData: Data?) async throws -> CommunityClip
+    func likeClip(id: UUID) async throws
+    func downloadAudio(_ clip: CommunityClip) async throws -> URL
+    func searchClips(query: String) async throws -> [CommunityClip]
+    func deleteClip(id: UUID) async throws
+}
+
 // MARK: - SupabaseService
 // Info.plist or環境変数からURL/Keyを取得する想定
 // 開発中はここにベタ書き、本番はSecrets管理に移行すること
 
-actor SupabaseService {
+actor SupabaseService: SupabaseClipBackend {
     static let shared = SupabaseService()
 
     private let client: SupabaseClient

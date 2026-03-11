@@ -6,18 +6,16 @@ struct ClipDetailFeature {
     @ObservableState
     struct State: Equatable {
         var clip: VideoClip
-        var audioFileURL: URL      // ShareLink / play 用に保持
+        /// URL for ShareLink; set by parent from videoClipClient.audioURL(clip).
+        var audioFileURL: URL
         var isPlaying: Bool = false
         var isUploading: Bool = false
         var showDeleteAlert: Bool = false
         var errorMessage: String?
 
-        init(clip: VideoClip) {
+        init(clip: VideoClip, audioFileURL: URL) {
             self.clip = clip
-            let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            self.audioFileURL = docs
-                .appendingPathComponent("clips", isDirectory: true)
-                .appendingPathComponent(clip.audioFilename)
+            self.audioFileURL = audioFileURL
         }
     }
 
@@ -57,10 +55,10 @@ struct ClipDetailFeature {
                     return .run { _ in await audioClient.stop() }
                 }
                 state.isPlaying = true
-                let url = state.audioFileURL
+                let audioURL = videoClipClient.audioURL(state.clip)
                 let dur = state.clip.durationSec
                 return .run { send in
-                    await audioClient.play(url)
+                    await audioClient.play(audioURL)
                     try? await Task.sleep(nanoseconds: UInt64(dur * 1_000_000_000))
                     await send(.stopPlayback)
                 }
@@ -77,7 +75,7 @@ struct ClipDetailFeature {
                 state.isUploading = true
                 state.errorMessage = nil
                 let clip = state.clip
-                let audioURL = state.audioFileURL
+                let audioURL = videoClipClient.audioURL(clip)
                 let thumbURL = videoClipClient.thumbnailURL(clip)
                 return .run { send in
                     do {

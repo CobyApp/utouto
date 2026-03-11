@@ -13,6 +13,7 @@ struct VideoClipClient {
     var audioURL: @Sendable (VideoClip) -> URL
     var thumbnailURL: @Sendable (VideoClip) -> URL
     var videoURL: @Sendable (VideoClip) -> URL
+    var hasVideoFile: @Sendable (VideoClip) -> Bool
 }
 
 extension VideoClipClient: DependencyKey {
@@ -27,7 +28,8 @@ extension VideoClipClient: DependencyKey {
             generateThumbnail: { url, t in try await impl.generateThumbnail(videoURL: url, atTime: t) },
             audioURL: { impl.audioURL(for: $0) },
             thumbnailURL: { impl.thumbnailURL(for: $0) },
-            videoURL: { impl.videoURL(for: $0) }
+            videoURL: { impl.videoURL(for: $0) },
+            hasVideoFile: { impl.hasVideoFile(for: $0) }
         )
     }()
 }
@@ -198,5 +200,9 @@ private actor VideoClipClientLive {
         let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
         return docs.appendingPathComponent("videos", isDirectory: true)
                    .appendingPathComponent(clip.videoFilename)
+    }
+
+    nonisolated func hasVideoFile(for clip: VideoClip) -> Bool {
+        FileManager.default.fileExists(atPath: videoURL(for: clip).path)
     }
 }

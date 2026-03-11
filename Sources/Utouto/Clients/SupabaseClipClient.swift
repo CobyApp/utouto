@@ -8,17 +8,22 @@ struct SupabaseClipClient {
     var downloadAudio: @Sendable (CommunityClip) async throws -> URL
     var searchClips: @Sendable (String) async throws -> [CommunityClip]
     var deleteClip: @Sendable (UUID) async throws -> Void
+
+    /// Build client with injectable backend (DIP: tests can pass a mock).
+    static func live(backend: SupabaseClipBackend) -> SupabaseClipClient {
+        SupabaseClipClient(
+            fetchClips: { page in try await backend.fetchClips(page: page) },
+            uploadClip: { clip, audio, thumb in try await backend.uploadClip(clip, audioData: audio, thumbData: thumb) },
+            likeClip: { id in try await backend.likeClip(id: id) },
+            downloadAudio: { clip in try await backend.downloadAudio(clip) },
+            searchClips: { q in try await backend.searchClips(query: q) },
+            deleteClip: { id in try await backend.deleteClip(id: id) }
+        )
+    }
 }
 
 extension SupabaseClipClient: DependencyKey {
-    static let liveValue = SupabaseClipClient(
-        fetchClips: { page in try await SupabaseService.shared.fetchClips(page: page) },
-        uploadClip: { clip, audio, thumb in try await SupabaseService.shared.uploadClip(clip, audioData: audio, thumbData: thumb) },
-        likeClip: { id in try await SupabaseService.shared.likeClip(id: id) },
-        downloadAudio: { clip in try await SupabaseService.shared.downloadAudio(clip) },
-        searchClips: { q in try await SupabaseService.shared.searchClips(query: q) },
-        deleteClip: { id in try await SupabaseService.shared.deleteClip(id: id) }
-    )
+    static let liveValue = SupabaseClipClient.live(backend: SupabaseService.shared)
 }
 
 extension DependencyValues {

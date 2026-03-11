@@ -58,7 +58,10 @@ struct MyLibraryFeature {
             // MARK: - Clip Detail
 
             case let .showClipDetail(clip):
-                state.clipDetail = ClipDetailFeature.State(clip: clip)
+                state.clipDetail = ClipDetailFeature.State(
+                    clip: clip,
+                    audioFileURL: videoClipClient.audioURL(clip)
+                )
                 return .none
 
             case .hideClipDetail:

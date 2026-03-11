@@ -1,6 +1,6 @@
 # うとうと (Utotōto) - モーニングコールアプリ
 
-iOS 17+向けの感情 몰입형 모닝콜 알람 앱입니다. SwiftUI + TCA(The Composable Architecture)로 구현되었습니다.
+iOS 26+向けの感情 몰입형 모닝콜 알람 앱입니다. SwiftUI + TCA(The Composable Architecture) + AlarmKit で実装されています。
 
 ## 주요 기능
 
@@ -16,9 +16,9 @@ iOS 17+向けの感情 몰입형 모닝콜 알람 앱입니다. SwiftUI + TCA(Th
 - **언어**: Swift 5.9+
 - **UI**: SwiftUI
 - **아키텍처**: TCA (The Composable Architecture)
-- **플랫폼**: iOS 17.0+
+- **플랫폼**: iOS 26.1+
 - **저장소**: FileManager (Documents 디렉토리)
-- **알림**: UNUserNotificationCenter
+- **알람**: AlarmKit (iOS 26)
 - **오디오**: AVFoundation
 
 ## 프로젝트 구조
@@ -58,6 +58,23 @@ Utouto/
 
 ## 빌드 및 실행 방법
 
+### 0. 매크로/패키지 빌드 오류가 날 때
+
+Swift Package 매크로(ComposableArchitecture 등)에서 **"Compiled module was created by a different version of the compiler"** 또는 **"Unable to find module dependency: 'SwiftDiagnostics'"** 오류가 나면:
+
+1. **Xcode를 종료**한다.
+2. 터미널에서 아래 **스크립트**를 실행해 prebuilts를 끄고 캐시를 지운다:
+   ```bash
+   chmod +x Scripts/fix-macro-build.sh
+   ./Scripts/fix-macro-build.sh
+   ```
+   (또는 수동: `defaults write com.apple.dt.Xcode IDEPackageEnablePrebuilts NO` 후  
+   `rm -rf ~/Library/Developer/Xcode/DerivedData/Utouto-*` 실행)
+3. Xcode를 다시 열고 **File → Packages → Reset Package Caches**, 그다음 **Resolve Package Versions**를 실행한다.
+4. **Product → Clean Build Folder** 후 다시 빌드한다.
+
+Prebuilts를 끄면 swift-syntax가 현재 컴파일러로 소스에서 다시 빌드되어 버전 불일치가 사라진다.
+
 ### 1. TCA 의존성 설치
 
 프로젝트는 Swift Package Manager를 사용하여 TCA를 의존성으로 포함합니다.
@@ -77,9 +94,22 @@ open utouto.xcodeproj
 
 ### 3. 빌드 및 실행
 
-- 타겟: iOS 17.0+
+- 타겟: iOS 26.1+
 - 시뮬레이터 또는 실제 기기에서 실행
 - **중요**: 실제 기기에서 테스트하려면 개발자 계정과 프로비저닝이 필요합니다
+
+### 4. 서명 (Signing for "Utouto" requires a development team)
+
+"Signing for Utouto requires a development team" 오류가 나면:
+
+- **Xcode에서**: 프로젝트 선택 → **Utouto** 타겟 → **Signing & Capabilities** → **Team**에서 본인 개발자 팀 선택.
+- **Tuist 사용 시**: `Project.swift`의 `DEVELOPMENT_TEAM`에 팀 ID(10자리)를 넣고 `tuist generate`로 프로젝트를 다시 생성한다.
+  ```swift
+  "DEVELOPMENT_TEAM": "XXXXXXXXXX",  // Apple Developer에서 확인
+  ```
+
+**`tuist generate` 후 "Unknown Name" / "No Account for Team" 이 뜨는 경우**  
+Tuist가 프로젝트를 새로 만들면 Xcode가 팀 ID만 보고 계정과 매칭하지 못할 수 있다. **Xcode → Settings → Accounts** 에서 Apple ID 확인 후, 프로젝트를 닫았다가 다시 열어보자. 그래도 안 되면 **Signing & Capabilities**에서 Team을 한 번 더 선택해 주면 된다 (다음 `tuist generate` 시 다시 선택해야 할 수 있음).
 
 ## 심층 링크 테스트
 

@@ -1,6 +1,5 @@
 import SwiftUI
 import PhotosUI
-import AVFoundation
 import UniformTypeIdentifiers
 import ComposableArchitecture
 
@@ -13,13 +12,7 @@ private struct VideoFileTransferable: Transferable {
         FileRepresentation(contentType: .movie) { video in
             SentTransferredFile(video.url)
         } importing: { received in
-            let ext = received.file.pathExtension.isEmpty ? "mov" : received.file.pathExtension
-            let dest = FileManager.default.temporaryDirectory
-                .appendingPathComponent(UUID().uuidString + "." + ext)
-            if FileManager.default.fileExists(atPath: dest.path) {
-                try FileManager.default.removeItem(at: dest)
-            }
-            try FileManager.default.copyItem(at: received.file, to: dest)
+            let dest = try FileStorageClient.copyToTemporaryDirectory(source: received.file)
             return Self(url: dest)
         }
     }

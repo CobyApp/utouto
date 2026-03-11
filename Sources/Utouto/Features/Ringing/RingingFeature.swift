@@ -93,21 +93,12 @@ struct RingingFeature {
                 state.clip = clip
                 guard let clip else { return .none }
 
-                let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-                let vidURL = docs
-                    .appendingPathComponent("videos", isDirectory: true)
-                    .appendingPathComponent(clip.videoFilename)
-
-                if FileManager.default.fileExists(atPath: vidURL.path) {
-                    // 動画ファイルあり → LoopingVideoPlayerView が音声込みで再生
-                    state.videoFileURL = vidURL
+                if videoClipClient.hasVideoFile(clip) {
+                    state.videoFileURL = videoClipClient.videoURL(clip)
                     return .none
                 } else {
-                    // 動画なし → 音声のみフォールバック
                     state.videoFileURL = nil
-                    let audioURL = docs
-                        .appendingPathComponent("clips", isDirectory: true)
-                        .appendingPathComponent(clip.audioFilename)
+                    let audioURL = videoClipClient.audioURL(clip)
                     return .run { _ in await audioClient.play(audioURL) }
                 }
 

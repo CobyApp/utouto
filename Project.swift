@@ -14,8 +14,6 @@ let project = Project(
     ],
     settings: .settings(
         base: [
-            "DEVELOPMENT_TEAM": "",
-            "CODE_SIGN_STYLE": "Automatic",
             "MARKETING_VERSION": "1.0",
             "CURRENT_PROJECT_VERSION": "1",
         ],
@@ -30,7 +28,7 @@ let project = Project(
             destinations: .iOS,
             product: .app,
             bundleId: "com.example.utouto",
-            deploymentTargets: .iOS("17.0"),
+            deploymentTargets: .iOS("26.1"),
             infoPlist: .file(path: "Sources/Utouto/Info.plist"),
             sources: ["Sources/Utouto/**"],
             resources: [],
@@ -45,7 +43,7 @@ let project = Project(
             destinations: .iOS,
             product: .unitTests,
             bundleId: "com.example.utouto.tests",
-            deploymentTargets: .iOS("17.0"),
+            deploymentTargets: .iOS("26.1"),
             sources: ["Tests/UtoutoTests/**"],
             dependencies: [.target(name: "Utouto")]
         ),

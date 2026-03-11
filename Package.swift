@@ -4,6 +4,8 @@ import PackageDescription
 let package = Package(
     name: "Utouto",
     platforms: [
+        // Use v17 for SPM/Tuist manifest compatibility (package-description 5.9).
+        // App deployment target iOS 26 is set in Project.swift and Xcode project.
         .iOS(.v17)
     ],
     products: [

@@ -4,7 +4,7 @@ import ComposableArchitecture
 @Reducer
 struct AlarmListFeature {
     @ObservableState
-    struct State {
+    struct State: Equatable {
         var alarms: [Alarm] = []
         var isLoading = false
         var showDeleteAlert = false
@@ -37,7 +37,7 @@ struct AlarmListFeature {
     }
 
     @Dependency(\.alarmRepository) var alarmRepository
-    @Dependency(\.notificationClient) var notificationClient
+    @Dependency(\.alarmKitClient) var alarmKitClient
     @Dependency(\.clock) var clock
     @Dependency(\.logger) var logger
 
@@ -71,9 +71,9 @@ struct AlarmListFeature {
                         updatedAlarm.updatedAt = clock.now()
                         try await alarmRepository.updateAlarm(updatedAlarm)
                         if isEnabled {
-                            try await notificationClient.scheduleAlarm(updatedAlarm, nil)
+                            try await alarmKitClient.scheduleAlarm(updatedAlarm, nil)
                         } else {
-                            await notificationClient.cancelAlarm(alarmId)
+                            await alarmKitClient.cancelAlarm(alarmId)
                         }
                         await send(.toggleAlarmResponse)
                         await send(.loadAlarms)
@@ -131,7 +131,7 @@ struct AlarmListFeature {
             case let .confirmDelete(alarm):
                 return .run { send in
                     do {
-                        await notificationClient.cancelAlarm(alarm.id)
+                        await alarmKitClient.cancelAlarm(alarm.id)
                         try await alarmRepository.deleteAlarm(alarm.id)
                         await send(.deleteAlarmResponse)
                         await send(.hideDeleteAlert)

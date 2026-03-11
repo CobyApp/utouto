@@ -37,8 +37,9 @@ struct AppFeature {
         case ringing(RingingFeature.Action)
     }
 
-    @Dependency(\.notificationClient) var notificationClient
-    @Dependency(\.videoClipClient) var videoClipClient
+    @Dependency(\.alarmKitClient) var alarmKitClient
+    @Dependency(\.clipImportClient) var clipImportClient
+    @Dependency(\.appRouter) var appRouter
 
     var body: some ReducerOf<Self> {
         Reduce { state, action in
@@ -49,7 +50,7 @@ struct AppFeature {
 
             case .checkNotificationAuthorization:
                 return .run { send in
-                    let ok = await notificationClient.isAuthorized()
+                    let ok = await alarmKitClient.isAuthorized()
                     await send(.setNeedsOnboarding(!ok))
                 }
 
@@ -59,11 +60,11 @@ struct AppFeature {
                 return .none
 
             case let .handleDeepLink(url):
-                guard let comps = URLComponents(url: url, resolvingAgainstBaseURL: false),
-                      comps.host == "ringing",
-                      let idStr = comps.queryItems?.first(where: { $0.name == "alarmId" })?.value,
-                      let id = UUID(uuidString: idStr) else { return .none }
-                state.ringing = RingingFeature.State(alarmId: id)
+                guard let deepLink = appRouter.parseDeepLink(url) else { return .none }
+                switch deepLink {
+                case .ringing(let alarmId):
+                    state.ringing = RingingFeature.State(alarmId: alarmId)
+                }
                 return .none
 
             case let .setTab(t):
@@ -94,24 +95,12 @@ struct AppFeature {
             case .myLibrary: return .none
 
             case .community(.delegate(.useClipAsAlarm(let url, let communityClip))):
-                let clipId = UUID()
                 var editState = AlarmEditFeature.State(alarm: nil)
-                editState.selectedClipId = clipId
+                editState.selectedClipId = communityClip.id
                 state.alarmEdit = editState
                 state.tab = .alarms
                 return .run { send in
-                    let audioFilename = url.lastPathComponent
-                    let clip = VideoClip(
-                        id: clipId,
-                        title: communityClip.title,
-                        sourceVideoFilename: "",
-                        audioFilename: audioFilename,
-                        thumbnailFilename: "",
-                        startSec: 0, endSec: communityClip.durationSec,
-                        durationSec: communityClip.durationSec,
-                        createdAt: Date(), isUploaded: true
-                    )
-                    try? await videoClipClient.saveClip(clip)
+                    try? await clipImportClient.importCommunityClip(communityClip, url)
                     await send(.myLibrary(.loadClips))
                 }
 

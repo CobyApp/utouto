@@ -28,7 +28,7 @@ struct AlarmDetailFeature {
 
     @Dependency(\.videoClipClient) var videoClipClient
     @Dependency(\.alarmRepository) var alarmRepository
-    @Dependency(\.notificationClient) var notificationClient
+    @Dependency(\.alarmKitClient) var alarmKitClient
     @Dependency(\.clock) var clock
 
     var body: some ReducerOf<Self> {
@@ -60,9 +60,9 @@ struct AlarmDetailFeature {
                 return .run { [updated] send in
                     try? await alarmRepository.updateAlarm(updated)
                     if isEnabled {
-                        try? await notificationClient.scheduleAlarm(updated, audioURL)
+                        try? await alarmKitClient.scheduleAlarm(updated, audioURL)
                     } else {
-                        await notificationClient.cancelAlarm(alarmId)
+                        await alarmKitClient.cancelAlarm(alarmId)
                     }
                     await send(.toggleEnabledResponse(updated))
                 }

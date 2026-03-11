@@ -22,7 +22,7 @@ struct SettingsFeature {
     }
 
     @Dependency(\.alarmRepository) var alarmRepository
-    @Dependency(\.notificationClient) var notificationClient
+    @Dependency(\.alarmKitClient) var alarmKitClient
     @Dependency(\.appRouter) var appRouter
 
     var body: some ReducerOf<Self> {
@@ -50,7 +50,7 @@ struct SettingsFeature {
 
             case .checkNotificationAuthorization:
                 return .run { send in
-                    let isAuthorized = await notificationClient.isAuthorized()
+                    let isAuthorized = await alarmKitClient.isAuthorized()
                     await send(.authorizationResponse(isAuthorized))
                 }
 
