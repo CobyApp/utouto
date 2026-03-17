@@ -20,7 +20,7 @@ struct AlarmEditFeatureView: View {
                         get: { store.selectedMinute },
                         set: { store.send(.updateMinute($0)) }
                     )) {
-                        ForEach(Array(stride(from: 0, to: 60, by: 5)), id: \.self) { m in
+                        ForEach(0..<60, id: \.self) { m in
                             Text(String(format: "%02d", m)).tag(m)
                         }
                     }

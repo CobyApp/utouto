@@ -115,7 +115,16 @@ private func makeSchedule(from alarm: Alarm) -> AlarmKit.Alarm.Schedule? {
     }
 
     if alarm.repeatDays.isEmpty {
-        return .relative(.init(time: time, repeats: .never))
+        // "Once" without a specific date: fire at next occurrence of (hour, minute)
+        var comps = DateComponents()
+        comps.hour = hour
+        comps.minute = minute
+        comps.second = 0
+        let cal = Calendar.current
+        guard let next = cal.nextDate(after: Date(), matching: comps, matchingPolicy: .nextTime) else {
+            return .relative(.init(time: time, repeats: .never))
+        }
+        return .fixed(next)
     }
 
     let weekdays: [Locale.Weekday] = alarm.repeatDays.compactMap { dayIndex in
