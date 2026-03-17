@@ -29,25 +29,25 @@ struct AppFeatureView: View {
             AlarmListFeatureView(
                 store: store.scope(state: \.alarmList, action: \.alarmList)
             )
-            .tabItem { Label("アラーム", systemImage: "alarm") }
+            .tabItem { Label(L10n.tabAlarms, systemImage: "alarm") }
             .tag(AppFeature.State.Tab.alarms)
 
             MyLibraryView(
                 store: store.scope(state: \.myLibrary, action: \.myLibrary)
             )
-            .tabItem { Label("マイ", systemImage: "music.note.list") }
+            .tabItem { Label(L10n.tabMyLibrary, systemImage: "music.note.list") }
             .tag(AppFeature.State.Tab.myLibrary)
 
             CommunityView(
                 store: store.scope(state: \.community, action: \.community)
             )
-            .tabItem { Label("コミュニティ", systemImage: "person.3") }
+            .tabItem { Label(L10n.tabCommunity, systemImage: "person.3") }
             .tag(AppFeature.State.Tab.community)
 
             SettingsFeatureView(
                 store: store.scope(state: \.settings, action: \.settings)
             )
-            .tabItem { Label("設定", systemImage: "gear") }
+            .tabItem { Label(L10n.tabSettings, systemImage: "gear") }
             .tag(AppFeature.State.Tab.settings)
         }
         .sheet(isPresented: Binding(

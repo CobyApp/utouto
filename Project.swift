@@ -2,6 +2,10 @@ import ProjectDescription
 
 let project = Project(
     name: "Utouto",
+    options: .options(
+        defaultKnownRegions: ["en", "ja", "ko"],
+        developmentRegion: "en"
+    ),
     packages: [
         .remote(
             url: "https://github.com/pointfreeco/swift-composable-architecture",
@@ -31,7 +35,12 @@ let project = Project(
             deploymentTargets: .iOS("26.1"),
             infoPlist: .file(path: "Sources/Utouto/Info.plist"),
             sources: ["Sources/Utouto/**"],
-            resources: [],
+            resources: [
+                .glob(pattern: "Sources/Utouto/Resources/en.lproj/**"),
+                .glob(pattern: "Sources/Utouto/Resources/ja.lproj/**"),
+                .glob(pattern: "Sources/Utouto/Resources/ko.lproj/**"),
+                .glob(pattern: "Sources/Utouto/Resources/AccentColor.colorset/**"),
+            ],
             dependencies: [
                 .package(product: "ComposableArchitecture", type: .runtime),
                 .package(product: "Supabase", type: .runtime),

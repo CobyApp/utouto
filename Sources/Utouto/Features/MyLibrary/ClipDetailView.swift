@@ -8,7 +8,7 @@ struct ClipDetailView: View {
         let f = DateFormatter()
         f.dateStyle = .medium
         f.timeStyle = .none
-        f.locale = Locale(identifier: "ja_JP")
+        f.locale = Locale(identifier: L10n.appLanguageCode ?? Locale.current.language.languageCode?.identifier ?? "en")
         return f
     }()
 
@@ -44,17 +44,17 @@ struct ClipDetailView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("閉じる") { store.send(.dismiss) }
+                    Button(L10n.close) { store.send(.dismiss) }
                 }
             }
-            .alert("削除しますか？", isPresented: Binding(
+            .alert(L10n.clipDeleteConfirmTitle, isPresented: Binding(
                 get: { store.showDeleteAlert },
                 set: { if !$0 { store.send(.cancelDelete) } }
             )) {
-                Button("削除", role: .destructive) { store.send(.confirmDelete) }
-                Button("キャンセル", role: .cancel) { store.send(.cancelDelete) }
+                Button(L10n.delete, role: .destructive) { store.send(.confirmDelete) }
+                Button(L10n.cancel, role: .cancel) { store.send(.cancelDelete) }
             } message: {
-                Text("「\(store.clip.title)」を削除します。この操作は取り消せません。")
+                Text(L10n.clipDeleteConfirmMessage(title: store.clip.title))
             }
         }
     }
@@ -108,7 +108,7 @@ struct ClipDetailView: View {
             HStack(spacing: 12) {
                 Image(systemName: store.isPlaying ? "stop.circle.fill" : "play.circle.fill")
                     .font(.system(size: 26))
-                Text(store.isPlaying ? "停止" : "再生")
+                Text(store.isPlaying ? L10n.stop : L10n.play)
                     .font(.headline)
             }
             .frame(maxWidth: .infinity)
@@ -125,7 +125,7 @@ struct ClipDetailView: View {
         VStack(spacing: 10) {
 
             // アラームに使う
-            menuButton(title: "アラームに使う", icon: "alarm.fill", color: .orange) {
+            menuButton(title: L10n.useAsAlarm, icon: "alarm.fill", color: .orange) {
                 store.send(.useAsAlarm)
             }
 
@@ -138,12 +138,12 @@ struct ClipDetailView: View {
                     icon: Image(systemName: "music.note")
                 )
             ) {
-                menuRow(title: "共有", icon: "square.and.arrow.up", color: .blue)
+                menuRow(title: L10n.share, icon: "square.and.arrow.up", color: .blue)
             }
 
             // コミュニティに投稿
             if store.clip.isUploaded {
-                menuRow(title: "コミュニティに投稿済み", icon: "checkmark.icloud.fill", color: .green, showChevron: false)
+                menuRow(title: L10n.uploadedToCommunity, icon: "checkmark.icloud.fill", color: .green, showChevron: false)
                     .opacity(0.6)
             } else {
                 Button {
@@ -161,7 +161,7 @@ struct ClipDetailView: View {
                         .frame(width: 28)
                         .foregroundStyle(.teal)
 
-                        Text(store.isUploading ? "アップロード中..." : "コミュニティに投稿")
+                        Text(store.isUploading ? L10n.uploading : L10n.uploadToCommunity)
                             .font(.body)
                             .foregroundStyle(.primary)
 
@@ -205,7 +205,7 @@ struct ClipDetailView: View {
                 Image(systemName: "trash.fill")
                     .font(.system(size: 17, weight: .semibold))
                     .frame(width: 28)
-                Text("削除")
+                Text(L10n.delete)
                     .font(.body)
                 Spacer()
             }

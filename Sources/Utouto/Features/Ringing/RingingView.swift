@@ -112,7 +112,7 @@ struct RingingFeatureView: View {
                 Button { store.send(.snooze) } label: {
                     VStack(spacing: 8) {
                         Image(systemName: "alarm").font(.title2)
-                        Text("スヌーズ").font(.headline)
+                        Text(L10n.snooze).font(.headline)
                     }
                     .foregroundStyle(.white)
                     .frame(width: 100, height: 80)
@@ -154,7 +154,7 @@ struct SlideToWakeView: View {
                 .fill(.ultraThinMaterial)
                 .frame(width: trackWidth, height: 64)
                 .overlay(
-                    Text("スライドして起きる")
+                    Text(L10n.slideToWake)
                         .font(.subheadline)
                         .foregroundStyle(.white.opacity(0.7))
                         .padding(.leading, thumbSize + 8)
@@ -202,7 +202,7 @@ struct LongPressWakeView: View {
             VStack(spacing: 4) {
                 Image(systemName: progress > 0 ? "hand.point.up.fill" : "hand.point.up")
                     .font(.title).foregroundStyle(.white)
-                Text("長押しで起きる")
+                Text(L10n.longPressToWake)
                     .font(.caption)
                     .foregroundStyle(.white.opacity(0.8))
                     .multilineTextAlignment(.center)

@@ -1,0 +1,155 @@
+/* Language */
+"language.system" = "System";
+"language.korean" = "한국어";
+"language.japanese" = "日本語";
+"language.english" = "English";
+
+/* Tab */
+"tab.alarms" = "Alarms";
+"tab.my_library" = "My Library";
+"tab.community" = "Community";
+"tab.settings" = "Settings";
+
+/* Common */
+"common.delete" = "Delete";
+"common.cancel" = "Cancel";
+"common.close" = "Close";
+"common.save" = "Save";
+"common.edit" = "Edit";
+
+/* Alarm list */
+"alarm.list.title" = "Alarms";
+"alarm.list.empty_title" = "No alarms";
+"alarm.list.empty_subtitle" = "Create your first alarm";
+"alarm.list.add" = "Add alarm";
+"alarm.list.delete_confirm_title" = "Delete alarm";
+"alarm.list.delete_confirm_message" = "Are you sure you want to delete this alarm?";
+
+/* Alarm detail */
+"alarm.detail.default_label" = "Alarm";
+"alarm.detail.enabled" = "On";
+"alarm.detail.disabled" = "Off";
+"alarm.detail.label" = "Label";
+"alarm.detail.repeat" = "Repeat";
+"alarm.detail.date" = "Date";
+"alarm.detail.sound" = "Alarm sound";
+"alarm.detail.sound_loading" = "Loading...";
+"alarm.detail.sound_none" = "None";
+"alarm.detail.snooze" = "Snooze";
+"alarm.detail.snooze_off" = "Off";
+"alarm.detail.dismiss_method" = "Dismiss method";
+"alarm.detail.dismiss_slide" = "Slide";
+"alarm.detail.dismiss_long_press" = "Long press";
+"alarm.detail.edit_button" = "Edit alarm";
+"alarm.detail.delete_button" = "Delete";
+"alarm.detail.snooze_unlimited" = "Unlimited";
+
+/* Alarm edit */
+"alarm.edit.title_new" = "New alarm";
+"alarm.edit.title_edit" = "Edit alarm";
+"alarm.edit.section_time" = "Time";
+"alarm.edit.section_label" = "Label";
+"alarm.edit.section_repeat" = "Repeat";
+"alarm.edit.section_clip" = "Clip";
+"alarm.edit.section_snooze" = "Snooze";
+"alarm.edit.section_dismiss" = "Dismiss method";
+"alarm.edit.hour" = "Hour";
+"alarm.edit.minute" = "Minute";
+"alarm.edit.label_placeholder" = "Label (optional)";
+"alarm.edit.repeat_once" = "Once";
+"alarm.edit.clip_picker_title" = "Clip to use";
+"alarm.edit.snooze_enabled" = "On";
+"alarm.edit.snooze_interval" = "Interval";
+"alarm.edit.snooze_max_count" = "Max count";
+"alarm.edit.dismiss_method_picker" = "Method";
+"alarm.edit.minutes_format" = "%d min";
+"alarm.edit.times_format" = "%d times";
+
+/* Ringing */
+"ringing.slide_to_wake" = "Slide to wake";
+"ringing.long_press_to_wake" = "Long press to wake";
+
+/* Library */
+"library.title" = "My Library";
+"library.empty_title" = "No clips";
+"library.empty_subtitle" = "Create a clip from video with the + button";
+"library.create_clip" = "Create clip";
+"library.delete_confirm_title" = "Delete?";
+"library.delete_confirm_message" = "This clip will be deleted. This cannot be undone.";
+"library.use_as_alarm" = "Use as alarm";
+"library.share" = "Share";
+"library.uploaded_to_community" = "Uploaded to community";
+"library.upload_to_community" = "Upload to community";
+"library.uploading" = "Uploading...";
+"library.play" = "Play";
+"library.stop" = "Stop";
+"library.clip_delete_confirm_title" = "Delete?";
+"library.clip_delete_confirm_message" = "「%@」 will be deleted. This cannot be undone.";
+
+/* Clip editor */
+"clip_editor.title" = "Create clip";
+"clip_editor.pick_video_title" = "Select video";
+"clip_editor.pick_video_subtitle" = "Choose a video from your photo library or files to extract audio and set the playback range for your alarm.";
+"clip_editor.open_photo_library" = "Open photo library";
+"clip_editor.open_files" = "Open from files";
+"clip_editor.trim_range" = "Trim range";
+"clip_editor.clip_name_label" = "Clip name";
+"clip_editor.clip_name_placeholder" = "e.g. Chorus of my favorite song";
+"clip_editor.previewing" = "Previewing";
+"clip_editor.saving" = "Saving clip...";
+"clip_editor.save_success" = "Saved!";
+"clip_editor.save_success_subtitle" = "The clip has been added to your library.";
+"clip_editor.back_to_library" = "Back to library";
+"clip_editor.duration_min" = "At least 1 second required";
+"clip_editor.duration_max" = "Keep within 30 seconds";
+"clip_editor.seconds_format" = "%.1f sec";
+
+/* Community */
+"community.title" = "Community";
+"community.search_placeholder" = "Search clips...";
+"community.empty_search" = "No results";
+"community.empty_default" = "No clips";
+"community.show_all" = "Show all";
+"community.load_more" = "Load more";
+
+/* Settings */
+"settings.title" = "Settings";
+"settings.permissions" = "Permissions";
+"settings.notification" = "Notifications";
+"settings.notification_allowed" = "Allowed";
+"settings.notification_denied" = "Denied";
+"settings.open_system_settings" = "Open Settings app";
+"settings.default_snooze" = "Default snooze";
+"settings.default_dismiss" = "Default dismiss method";
+"settings.other" = "Other";
+"settings.vibration" = "Vibration";
+"settings.language" = "Language";
+"settings.language_section" = "App language";
+
+/* Onboarding */
+"onboarding.permission_title" = "Notification permission";
+"onboarding.permission_message" = "Utouto needs notification permission to work properly.";
+"onboarding.allow_button" = "Allow notifications";
+"onboarding.open_settings" = "Open Settings";
+
+/* AlarmKit */
+"alarm_kit.default_title" = "Utouto";
+"alarm_kit.snooze_button" = "Snooze";
+
+/* Repeat / weekdays */
+"alarm.repeat_once" = "Once";
+"alarm.repeat_daily" = "Every day";
+"alarm.weekday_sun" = "Sun";
+"alarm.weekday_mon" = "Mon";
+"alarm.weekday_tue" = "Tue";
+"alarm.weekday_wed" = "Wed";
+"alarm.weekday_thu" = "Thu";
+"alarm.weekday_fri" = "Fri";
+"alarm.weekday_sat" = "Sat";
+
+/* Wake texts */
+"wake.1" = "Good morning... time to get up";
+"wake.2" = "It's time!";
+"wake.3" = "Time to wake up";
+"wake.4" = "Get up!";
+"wake.5" = "What a nice morning";

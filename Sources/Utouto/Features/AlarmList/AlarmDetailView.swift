@@ -14,17 +14,17 @@ struct AlarmDetailView: View {
                 }
                 .padding()
             }
-            .navigationTitle(store.alarm.label.isEmpty ? "アラーム" : store.alarm.label)
+            .navigationTitle(store.alarm.label.isEmpty ? L10n.alarmDefaultLabel : store.alarm.label)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("閉じる") { store.send(.delegate(.dismiss)) }
+                    Button(L10n.close) { store.send(.delegate(.dismiss)) }
                 }
                 ToolbarItem(placement: .primaryAction) {
                     Button {
                         store.send(.delegate(.edit(store.alarm)))
                     } label: {
-                        Text("編集").fontWeight(.semibold)
+                        Text(L10n.edit).fontWeight(.semibold)
                     }
                 }
             }
@@ -49,7 +49,7 @@ struct AlarmDetailView: View {
             .labelsHidden()
             .scaleEffect(1.2)
 
-            Text(store.alarm.enabled ? "有効" : "無効")
+            Text(store.alarm.enabled ? L10n.alarmEnabled : L10n.alarmDisabled)
                 .font(.subheadline)
                 .foregroundStyle(store.alarm.enabled ? .green : .secondary)
         }
@@ -64,21 +64,21 @@ struct AlarmDetailView: View {
     private var infoCards: some View {
         VStack(spacing: 1) {
             if !store.alarm.label.isEmpty {
-                infoRow(icon: "tag", title: "ラベル", value: store.alarm.label)
+                infoRow(icon: "tag", title: L10n.alarmLabel, value: store.alarm.label)
                 Divider().padding(.leading, 52)
             }
 
             infoRow(
                 icon: "repeat",
-                title: "繰り返し",
-                value: store.alarm.repeatDaysString
+                title: L10n.alarmRepeat,
+                value: L10n.repeatDaysString(repeatDays: store.alarm.repeatDays, isEmpty: store.alarm.repeatDays.isEmpty, isFullWeek: store.alarm.repeatDays.count == 7)
             )
 
             if store.alarm.oneTimeDate != nil {
                 Divider().padding(.leading, 52)
                 infoRow(
                     icon: "calendar",
-                    title: "日付",
+                    title: L10n.alarmDate,
                     value: store.alarm.oneTimeDate.map { formatDate($0) } ?? ""
                 )
             }
@@ -86,11 +86,11 @@ struct AlarmDetailView: View {
             Divider().padding(.leading, 52)
 
             if let clipTitle = store.clipTitle {
-                infoRow(icon: "music.note", title: "アラーム音", value: clipTitle)
+                infoRow(icon: "music.note", title: L10n.alarmSound, value: clipTitle)
             } else if store.alarm.clipId != nil {
-                infoRow(icon: "music.note", title: "アラーム音", value: "読み込み中...")
+                infoRow(icon: "music.note", title: L10n.alarmSound, value: L10n.alarmSoundLoading)
             } else {
-                infoRow(icon: "speaker.slash", title: "アラーム音", value: "なし")
+                infoRow(icon: "speaker.slash", title: L10n.alarmSound, value: L10n.alarmSoundNone)
             }
 
             Divider().padding(.leading, 52)
@@ -98,19 +98,19 @@ struct AlarmDetailView: View {
             if store.alarm.snoozeEnabled {
                 infoRow(
                     icon: "clock.arrow.circlepath",
-                    title: "スヌーズ",
-                    value: "\(store.alarm.snoozeIntervalMin)分 / \(snoozeMaxText)"
+                    title: L10n.snooze,
+                    value: String(format: L10n.minutesFormat, store.alarm.snoozeIntervalMin) + " / " + snoozeMaxText
                 )
             } else {
-                infoRow(icon: "clock.arrow.circlepath", title: "スヌーズ", value: "オフ")
+                infoRow(icon: "clock.arrow.circlepath", title: L10n.snooze, value: L10n.snoozeOff)
             }
 
             Divider().padding(.leading, 52)
 
             infoRow(
                 icon: "hand.tap",
-                title: "解除方法",
-                value: store.alarm.dismissMode == .slide ? "スライド" : "長押し"
+                title: L10n.dismissMethod,
+                value: store.alarm.dismissMode == .slide ? L10n.dismissSlide : L10n.dismissLongPress
             )
         }
         .background(Color(.systemBackground))
@@ -148,7 +148,7 @@ struct AlarmDetailView: View {
             } label: {
                 HStack {
                     Image(systemName: "pencil")
-                    Text("アラームを編集")
+                    Text(L10n.alarmEditButton)
                 }
                 .font(.headline)
                 .foregroundStyle(.white)
@@ -162,7 +162,7 @@ struct AlarmDetailView: View {
             } label: {
                 HStack {
                     Image(systemName: "trash")
-                    Text("削除")
+                    Text(L10n.alarmDeleteButton)
                 }
                 .font(.headline)
                 .frame(maxWidth: .infinity).frame(height: 52)
@@ -177,15 +177,15 @@ struct AlarmDetailView: View {
 
     private var snoozeMaxText: String {
         switch store.alarm.snoozeMaxCount {
-        case .unlimited: return "無制限"
-        case let .limited(n): return "\(n)回"
+        case .unlimited: return L10n.snoozeUnlimited
+        case let .limited(n): return String(format: L10n.timesFormat, n)
         }
     }
 
     private func formatDate(_ date: Date) -> String {
         let f = DateFormatter()
         f.dateStyle = .medium
-        f.locale = Locale(identifier: "ja_JP")
+        f.locale = Locale(identifier: L10n.appLanguageCode ?? Locale.current.language.languageCode?.identifier ?? "en")
         return f.string(from: date)
     }
 }

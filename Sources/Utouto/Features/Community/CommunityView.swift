@@ -9,7 +9,7 @@ struct CommunityView: View {
             VStack(spacing: 0) {
                 HStack {
                     Image(systemName: "magnifyingglass").foregroundStyle(.secondary)
-                    TextField("クリップを検索...", text: Binding(
+                    TextField(L10n.communitySearchPlaceholder, text: Binding(
                         get: { store.searchQuery },
                         set: { store.send(.updateSearch($0)) }
                     ))
@@ -36,7 +36,7 @@ struct CommunityView: View {
                     clipScrollView
                 }
             }
-            .navigationTitle("コミュニティ")
+            .navigationTitle(L10n.communityTitle)
             .task { await store.send(.onAppear).finish() }
             .refreshable { store.send(.loadFirstPage) }
         }
@@ -46,11 +46,11 @@ struct CommunityView: View {
         VStack(spacing: 12) {
             Spacer()
             Image(systemName: "music.note.tv").font(.system(size: 60)).foregroundStyle(.secondary)
-            Text(store.isSearching ? "検索結果がありません" : "クリップがありません")
+            Text(store.isSearching ? L10n.communityEmptySearch : L10n.communityEmptyDefault)
                 .font(.headline).foregroundStyle(.secondary)
             if store.isSearching {
                 Button { store.send(.clearSearch) } label: {
-                    Text("すべて表示").foregroundStyle(.blue)
+                    Text(L10n.communityShowAll).foregroundStyle(.blue)
                 }
             }
             Spacer()
@@ -67,18 +67,22 @@ struct CommunityView: View {
                     CommunityClipCardView(
                         clip: clip,
                         isPlaying: store.playingClipId == clip.id,
-                        isDownloading: store.downloadingClipId == clip.id
+                        isDownloading: store.downloadingClipId == clip.id,
+                        isDeleting: store.deletingClipId == clip.id,
+                        canDelete: !store.currentUserId.isEmpty && clip.userId == store.currentUserId
                     ) {
                         store.send(.playClip(clip))
                     } onLike: {
                         store.send(.likeClip(clip))
                     } onDownload: {
                         store.send(.downloadClip(clip))
+                    } onDelete: {
+                        store.send(.deleteClip(clip))
                     }
                 }
                 if store.hasMore && !store.isLoadingMore {
                     Button { store.send(.loadMore) } label: {
-                        Text("もっと見る").font(.subheadline).foregroundStyle(.blue)
+                        Text(L10n.communityLoadMore).font(.subheadline).foregroundStyle(.blue)
                     }.padding()
                 }
                 if store.isLoadingMore { ProgressView().padding() }
@@ -92,9 +96,12 @@ struct CommunityClipCardView: View {
     let clip: CommunityClip
     let isPlaying: Bool
     let isDownloading: Bool
+    let isDeleting: Bool
+    let canDelete: Bool
     let onPlay: () -> Void
     let onLike: () -> Void
     let onDownload: () -> Void
+    let onDelete: () -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -138,12 +145,22 @@ struct CommunityClipCardView: View {
                     ProgressView().scaleEffect(0.8)
                 } else {
                     Button(action: onDownload) {
-                        Label("アラームに使う", systemImage: "alarm.fill")
+                        Label(L10n.useAsAlarm, systemImage: "alarm.fill")
                             .font(.caption).fontWeight(.semibold)
                             .foregroundStyle(.white)
                             .padding(.horizontal, 12).padding(.vertical, 6)
                             .background(Color.orange)
                             .clipShape(Capsule())
+                    }
+                }
+                if canDelete {
+                    if isDeleting {
+                        ProgressView().scaleEffect(0.8)
+                    } else {
+                        Button(role: .destructive, action: onDelete) {
+                            Image(systemName: "trash")
+                                .font(.subheadline)
+                        }
                     }
                 }
             }

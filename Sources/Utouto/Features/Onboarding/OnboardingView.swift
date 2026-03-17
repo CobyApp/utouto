@@ -12,11 +12,11 @@ struct OnboardingFeatureView: View {
                 .font(.system(size: 80))
                 .foregroundStyle(.tint)
 
-            Text("通知許可")
+            Text(L10n.onboardingPermissionTitle)
                 .font(.largeTitle)
                 .fontWeight(.bold)
 
-            Text("うとうと が適切に動作するためには\n通知の許可が必要です。")
+            Text(L10n.onboardingPermissionMessage)
                 .multilineTextAlignment(.center)
                 .foregroundStyle(.secondary)
                 .padding(.horizontal)
@@ -32,7 +32,7 @@ struct OnboardingFeatureView: View {
                         ProgressView()
                             .tint(.white)
                     } else {
-                        Text("通知を許可")
+                        Text(L10n.onboardingAllowButton)
                             .font(.headline)
                             .foregroundStyle(.white)
                     }
@@ -46,7 +46,7 @@ struct OnboardingFeatureView: View {
                 Button {
                     store.send(.openSettings)
                 } label: {
-                    Text("設定へ")
+                    Text(L10n.onboardingOpenSettings)
                         .font(.headline)
                         .foregroundStyle(.blue)
                 }

@@ -6,6 +6,7 @@ struct CommunityFeature {
     @ObservableState
     struct State: Equatable {
         var clips: [CommunityClip] = []
+        var currentUserId: String = ""
         var isLoading = false
         var isLoadingMore = false
         var currentPage = 0
@@ -14,11 +15,17 @@ struct CommunityFeature {
         var isSearching = false
         var playingClipId: UUID?
         var downloadingClipId: UUID?
+        var deletingClipId: UUID?
         var errorMessage: String?
+
+        func canDelete(_ clip: CommunityClip) -> Bool {
+            !currentUserId.isEmpty && clip.userId == currentUserId
+        }
     }
 
     enum Action {
         case onAppear
+        case setCurrentUserId(String)
         case loadFirstPage
         case loadMore
         case clipsResponse(Result<[CommunityClip], Error>, isFirstPage: Bool)
@@ -30,6 +37,8 @@ struct CommunityFeature {
         case downloadClip(CommunityClip)
         case downloadResponse(Result<(CommunityClip, URL), Error>)
         case likeClip(CommunityClip)
+        case deleteClip(CommunityClip)
+        case deleteResponse(Result<Void, Error>)
 
         @CasePathable
         enum Delegate { case useClipAsAlarm(URL, CommunityClip) }
@@ -46,8 +55,18 @@ struct CommunityFeature {
             switch action {
 
             case .onAppear:
-                guard state.clips.isEmpty else { return .none }
-                return .send(.loadFirstPage)
+                let isEmpty = state.clips.isEmpty
+                return .merge(
+                    .run { send in
+                        let id = await supabaseClient.getCurrentUserId()
+                        await send(.setCurrentUserId(id))
+                    },
+                    isEmpty ? .send(.loadFirstPage) : .none
+                )
+
+            case let .setCurrentUserId(id):
+                state.currentUserId = id
+                return .none
 
             case .loadFirstPage:
                 state.isLoading = true; state.currentPage = 0; state.hasMore = true
@@ -120,12 +139,16 @@ struct CommunityFeature {
                 return .run { send in
                     do {
                         let url = try await supabaseClient.downloadAudio(clip)
+                        try? await supabaseClient.incrementDownloadCount(clip.id)
                         await send(.downloadResponse(.success((clip, url))))
                     } catch { await send(.downloadResponse(.failure(error))) }
                 }
 
             case let .downloadResponse(.success((clip, url))):
                 state.downloadingClipId = nil
+                if let idx = state.clips.firstIndex(where: { $0.id == clip.id }) {
+                    state.clips[idx].downloadCount += 1
+                }
                 haptic.notification(.success)
                 return .send(.delegate(.useClipAsAlarm(url, clip)))
 
@@ -136,6 +159,26 @@ struct CommunityFeature {
             case let .likeClip(clip):
                 haptic.impact(.light)
                 return .run { _ in try? await supabaseClient.likeClip(clip.id) }
+
+            case let .deleteClip(clip):
+                guard state.canDelete(clip) else { return .none }
+                state.deletingClipId = clip.id
+                return .run { send in
+                    do {
+                        try await supabaseClient.deleteClip(clip.id)
+                        await send(.deleteResponse(.success(())))
+                    } catch { await send(.deleteResponse(.failure(error))) }
+                }
+
+            case let .deleteResponse(.success):
+                state.deletingClipId = nil
+                haptic.notification(.success)
+                return .send(.loadFirstPage)
+
+            case let .deleteResponse(.failure(err)):
+                state.deletingClipId = nil
+                state.errorMessage = err.localizedDescription
+                return .none
 
             case .delegate: return .none
             }

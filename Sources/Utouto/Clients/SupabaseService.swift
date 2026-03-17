@@ -3,10 +3,12 @@ import Supabase
 
 // MARK: - SupabaseClipBackend (DIP: depend on abstraction for testability)
 protocol SupabaseClipBackend: AnyObject, Sendable {
+    func getCurrentUserId() async -> String
     func fetchClips(page: Int) async throws -> [CommunityClip]
     func uploadClip(_ clip: VideoClip, audioData: Data, thumbData: Data?) async throws -> CommunityClip
     func likeClip(id: UUID) async throws
     func downloadAudio(_ clip: CommunityClip) async throws -> URL
+    func incrementDownloadCount(clipId: UUID) async throws
     func searchClips(query: String) async throws -> [CommunityClip]
     func deleteClip(id: UUID) async throws
 }
@@ -24,8 +26,11 @@ actor SupabaseService: SupabaseClipBackend {
     private var docs: URL { fm.urls(for: .documentDirectory, in: .userDomainMask)[0] }
     private var downloadsDir: URL { docs.appendingPathComponent("downloads", isDirectory: true) }
 
+    /// Device-scoped user id for "uploaded by me" / delete-only-by-uploader. Stored in UserDefaults.
+    private static let deviceUserIdKey = "utouto_device_user_id"
+
     private init() {
-        // TODO: Replace with your Supabase project URL and anon key
+        // Use SUPABASE_URL and SUPABASE_ANON_KEY from Info.plist. Anon key from Supabase Dashboard → Settings → API.
         let supabaseURL = URL(string: Bundle.main.object(forInfoDictionaryKey: "SUPABASE_URL") as? String ?? "https://your-project.supabase.co")!
         let supabaseKey = Bundle.main.object(forInfoDictionaryKey: "SUPABASE_ANON_KEY") as? String ?? "your-anon-key"
         client = SupabaseClient(
@@ -35,6 +40,15 @@ actor SupabaseService: SupabaseClipBackend {
                 auth: .init(emitLocalSessionAsInitialSession: true)
             )
         )
+    }
+
+    func getCurrentUserId() async -> String {
+        if let existing = UserDefaults.standard.string(forKey: Self.deviceUserIdKey), !existing.isEmpty {
+            return existing
+        }
+        let newId = UUID().uuidString
+        UserDefaults.standard.set(newId, forKey: Self.deviceUserIdKey)
+        return newId
     }
 
     // MARK: - Fetch
@@ -102,7 +116,8 @@ actor SupabaseService: SupabaseClipBackend {
                 case durationSec = "duration_sec"
             }
         }
-        let payload = InsertPayload(id: clip.id, userId: "anonymous",
+        let userId = await getCurrentUserId()
+        let payload = InsertPayload(id: clip.id, userId: userId,
                                     title: clip.title, description: "",
                                     audioUrl: audioPublicURL, thumbnailUrl: thumbURL,
                                     durationSec: clip.durationSec)
@@ -135,6 +150,10 @@ actor SupabaseService: SupabaseClipBackend {
         let (data, _) = try await URLSession.shared.data(from: url)
         try data.write(to: destURL)
         return destURL
+    }
+
+    func incrementDownloadCount(clipId: UUID) async throws {
+        try await client.rpc("increment_download_count", params: ["clip_id": clipId.uuidString]).execute()
     }
 
     // MARK: - Delete

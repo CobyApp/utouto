@@ -1,0 +1,155 @@
+/* Language */
+"language.system" = "시스템";
+"language.korean" = "한국어";
+"language.japanese" = "日本語";
+"language.english" = "English";
+
+/* Tab */
+"tab.alarms" = "알람";
+"tab.my_library" = "내 보관함";
+"tab.community" = "커뮤니티";
+"tab.settings" = "설정";
+
+/* Common */
+"common.delete" = "삭제";
+"common.cancel" = "취소";
+"common.close" = "닫기";
+"common.save" = "저장";
+"common.edit" = "편집";
+
+/* Alarm list */
+"alarm.list.title" = "알람";
+"alarm.list.empty_title" = "알람이 없습니다";
+"alarm.list.empty_subtitle" = "첫 알람을 만들어 보세요";
+"alarm.list.add" = "알람 추가";
+"alarm.list.delete_confirm_title" = "알람 삭제";
+"alarm.list.delete_confirm_message" = "이 알람을 삭제할까요?";
+
+/* Alarm detail */
+"alarm.detail.default_label" = "알람";
+"alarm.detail.enabled" = "켜짐";
+"alarm.detail.disabled" = "꺼짐";
+"alarm.detail.label" = "라벨";
+"alarm.detail.repeat" = "반복";
+"alarm.detail.date" = "날짜";
+"alarm.detail.sound" = "알람음";
+"alarm.detail.sound_loading" = "불러오는 중...";
+"alarm.detail.sound_none" = "없음";
+"alarm.detail.snooze" = "스누즈";
+"alarm.detail.snooze_off" = "끔";
+"alarm.detail.dismiss_method" = "해제 방법";
+"alarm.detail.dismiss_slide" = "슬라이드";
+"alarm.detail.dismiss_long_press" = "길게 누르기";
+"alarm.detail.edit_button" = "알람 편집";
+"alarm.detail.delete_button" = "삭제";
+"alarm.detail.snooze_unlimited" = "무제한";
+
+/* Alarm edit */
+"alarm.edit.title_new" = "새 알람";
+"alarm.edit.title_edit" = "알람 편집";
+"alarm.edit.section_time" = "시간";
+"alarm.edit.section_label" = "라벨";
+"alarm.edit.section_repeat" = "반복";
+"alarm.edit.section_clip" = "클립";
+"alarm.edit.section_snooze" = "스누즈";
+"alarm.edit.section_dismiss" = "해제 방법";
+"alarm.edit.hour" = "시";
+"alarm.edit.minute" = "분";
+"alarm.edit.label_placeholder" = "라벨 (선택)";
+"alarm.edit.repeat_once" = "한 번만";
+"alarm.edit.clip_picker_title" = "사용할 클립";
+"alarm.edit.snooze_enabled" = "켜기";
+"alarm.edit.snooze_interval" = "간격(분)";
+"alarm.edit.snooze_max_count" = "최대 횟수";
+"alarm.edit.dismiss_method_picker" = "방법";
+"alarm.edit.minutes_format" = "%d분";
+"alarm.edit.times_format" = "%d회";
+
+/* Ringing */
+"ringing.slide_to_wake" = "슬라이드하여 일어나기";
+"ringing.long_press_to_wake" = "길게 눌러 일어나기";
+
+/* Library */
+"library.title" = "내 보관함";
+"library.empty_title" = "클립이 없습니다";
+"library.empty_subtitle" = "+ 버튼으로 동영상에서 클립을 만들어 보세요";
+"library.create_clip" = "클립 만들기";
+"library.delete_confirm_title" = "삭제할까요?";
+"library.delete_confirm_message" = "이 클립을 삭제합니다. 되돌릴 수 없습니다.";
+"library.use_as_alarm" = "알람으로 사용";
+"library.share" = "공유";
+"library.uploaded_to_community" = "커뮤니티에 업로드됨";
+"library.upload_to_community" = "커뮤니티에 올리기";
+"library.uploading" = "업로드 중...";
+"library.play" = "재생";
+"library.stop" = "정지";
+"library.clip_delete_confirm_title" = "삭제할까요?";
+"library.clip_delete_confirm_message" = "「%@」을(를) 삭제합니다. 되돌릴 수 없습니다.";
+
+/* Clip editor */
+"clip_editor.title" = "클립 만들기";
+"clip_editor.pick_video_title" = "동영상 선택";
+"clip_editor.pick_video_subtitle" = "사진 라이브러리 또는 파일에서 동영상을 선택하면\n음성을 추출해 알람 구간을 설정할 수 있습니다.";
+"clip_editor.open_photo_library" = "사진 라이브러리 열기";
+"clip_editor.open_files" = "파일에서 선택";
+"clip_editor.trim_range" = "구간 설정";
+"clip_editor.clip_name_label" = "클립 이름";
+"clip_editor.clip_name_placeholder" = "예: 좋아하는 노래 후렴구";
+"clip_editor.previewing" = "미리 듣는 중";
+"clip_editor.saving" = "클립 저장 중...";
+"clip_editor.save_success" = "저장 완료!";
+"clip_editor.save_success_subtitle" = "클립이 보관함에 추가되었습니다.";
+"clip_editor.back_to_library" = "보관함으로";
+"clip_editor.duration_min" = "최소 1초 이상이어야 합니다";
+"clip_editor.duration_max" = "30초 이내로 설정해 주세요";
+"clip_editor.seconds_format" = "%.1f초";
+
+/* Community */
+"community.title" = "커뮤니티";
+"community.search_placeholder" = "클립 검색...";
+"community.empty_search" = "검색 결과 없음";
+"community.empty_default" = "클립이 없습니다";
+"community.show_all" = "전체 보기";
+"community.load_more" = "더 보기";
+
+/* Settings */
+"settings.title" = "설정";
+"settings.permissions" = "권한";
+"settings.notification" = "알림";
+"settings.notification_allowed" = "허용됨";
+"settings.notification_denied" = "허용 안 됨";
+"settings.open_system_settings" = "설정 앱 열기";
+"settings.default_snooze" = "기본 스누즈";
+"settings.default_dismiss" = "기본 해제 방법";
+"settings.other" = "기타";
+"settings.vibration" = "진동";
+"settings.language" = "언어";
+"settings.language_section" = "앱 언어";
+
+/* Onboarding */
+"onboarding.permission_title" = "알림 권한";
+"onboarding.permission_message" = "앱이 정상적으로 동작하려면\n알림 권한이 필요합니다.";
+"onboarding.allow_button" = "알림 허용";
+"onboarding.open_settings" = "설정으로 이동";
+
+/* AlarmKit */
+"alarm_kit.default_title" = "우투토";
+"alarm_kit.snooze_button" = "스누즈";
+
+/* Repeat / weekdays */
+"alarm.repeat_once" = "한 번만";
+"alarm.repeat_daily" = "매일";
+"alarm.weekday_sun" = "일";
+"alarm.weekday_mon" = "월";
+"alarm.weekday_tue" = "화";
+"alarm.weekday_wed" = "수";
+"alarm.weekday_thu" = "목";
+"alarm.weekday_fri" = "금";
+"alarm.weekday_sat" = "토";
+
+/* Wake texts */
+"wake.1" = "좋은 아침… 일어날 시간이에요";
+"wake.2" = "시간이에요!";
+"wake.3" = "일어날 시간이에요";
+"wake.4" = "빨리 일어나요!";
+"wake.5" = "좋은 아침이에요";

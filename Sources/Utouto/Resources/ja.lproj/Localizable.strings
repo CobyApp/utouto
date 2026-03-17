@@ -1,0 +1,155 @@
+/* Language */
+"language.system" = "システム";
+"language.korean" = "한국어";
+"language.japanese" = "日本語";
+"language.english" = "English";
+
+/* Tab */
+"tab.alarms" = "アラーム";
+"tab.my_library" = "マイ";
+"tab.community" = "コミュニティ";
+"tab.settings" = "設定";
+
+/* Common */
+"common.delete" = "削除";
+"common.cancel" = "キャンセル";
+"common.close" = "閉じる";
+"common.save" = "保存";
+"common.edit" = "編集";
+
+/* Alarm list */
+"alarm.list.title" = "アラーム";
+"alarm.list.empty_title" = "アラームがありません";
+"alarm.list.empty_subtitle" = "最初のアラームを作成しましょう";
+"alarm.list.add" = "アラームを追加";
+"alarm.list.delete_confirm_title" = "アラームを削除";
+"alarm.list.delete_confirm_message" = "このアラームを削除しますか？";
+
+/* Alarm detail */
+"alarm.detail.default_label" = "アラーム";
+"alarm.detail.enabled" = "有効";
+"alarm.detail.disabled" = "無効";
+"alarm.detail.label" = "ラベル";
+"alarm.detail.repeat" = "繰り返し";
+"alarm.detail.date" = "日付";
+"alarm.detail.sound" = "アラーム音";
+"alarm.detail.sound_loading" = "読み込み中...";
+"alarm.detail.sound_none" = "なし";
+"alarm.detail.snooze" = "スヌーズ";
+"alarm.detail.snooze_off" = "オフ";
+"alarm.detail.dismiss_method" = "解除方法";
+"alarm.detail.dismiss_slide" = "スライド";
+"alarm.detail.dismiss_long_press" = "長押し";
+"alarm.detail.edit_button" = "アラームを編集";
+"alarm.detail.delete_button" = "削除";
+"alarm.detail.snooze_unlimited" = "無制限";
+
+/* Alarm edit */
+"alarm.edit.title_new" = "新しいアラーム";
+"alarm.edit.title_edit" = "アラームを編集";
+"alarm.edit.section_time" = "時間";
+"alarm.edit.section_label" = "ラベル";
+"alarm.edit.section_repeat" = "繰り返し";
+"alarm.edit.section_clip" = "クリップ";
+"alarm.edit.section_snooze" = "スヌーズ";
+"alarm.edit.section_dismiss" = "解除方法";
+"alarm.edit.hour" = "時";
+"alarm.edit.minute" = "分";
+"alarm.edit.label_placeholder" = "ラベル (オプション)";
+"alarm.edit.repeat_once" = "一度だけ";
+"alarm.edit.clip_picker_title" = "使用するクリップ";
+"alarm.edit.snooze_enabled" = "有効";
+"alarm.edit.snooze_interval" = "間隔（分）";
+"alarm.edit.snooze_max_count" = "最大回数";
+"alarm.edit.dismiss_method_picker" = "方法";
+"alarm.edit.minutes_format" = "%d分";
+"alarm.edit.times_format" = "%d回";
+
+/* Ringing */
+"ringing.slide_to_wake" = "スライドして起きる";
+"ringing.long_press_to_wake" = "長押しで起きる";
+
+/* Library */
+"library.title" = "マイライブラリ";
+"library.empty_title" = "クリップがありません";
+"library.empty_subtitle" = "＋ボタンで動画からクリップを作ろう";
+"library.create_clip" = "クリップを作成";
+"library.delete_confirm_title" = "削除しますか？";
+"library.delete_confirm_message" = "このクリップを削除します。";
+"library.use_as_alarm" = "アラームに使う";
+"library.share" = "共有";
+"library.uploaded_to_community" = "コミュニティに投稿済み";
+"library.upload_to_community" = "コミュニティに投稿";
+"library.uploading" = "アップロード中...";
+"library.play" = "再生";
+"library.stop" = "停止";
+"library.clip_delete_confirm_title" = "削除しますか？";
+"library.clip_delete_confirm_message" = "「%@」を削除します。この操作は取り消せません。";
+
+/* Clip editor */
+"clip_editor.title" = "クリップを作成";
+"clip_editor.pick_video_title" = "動画を選択";
+"clip_editor.pick_video_subtitle" = "フォトライブラリまたはファイルから動画を選んで\n音声を抽出し、再生範囲を設定してアラームに使えます";
+"clip_editor.open_photo_library" = "フォトライブラリを開く";
+"clip_editor.open_files" = "ファイルから選択";
+"clip_editor.trim_range" = "トリミング範囲";
+"clip_editor.clip_name_label" = "クリップ名";
+"clip_editor.clip_name_placeholder" = "例：好きな曲のサビ";
+"clip_editor.previewing" = "試聴中";
+"clip_editor.saving" = "クリップを保存中...";
+"clip_editor.save_success" = "保存完了！";
+"clip_editor.save_success_subtitle" = "クリップがライブラリに追加されました";
+"clip_editor.back_to_library" = "ライブラリへ戻る";
+"clip_editor.duration_min" = "最低1秒以上にしてください";
+"clip_editor.duration_max" = "⚠️ 30秒以内にしてください";
+"clip_editor.seconds_format" = "%.1f 秒";
+
+/* Community */
+"community.title" = "コミュニティ";
+"community.search_placeholder" = "クリップを検索...";
+"community.empty_search" = "検索結果がありません";
+"community.empty_default" = "クリップがありません";
+"community.show_all" = "すべて表示";
+"community.load_more" = "もっと見る";
+
+/* Settings */
+"settings.title" = "設定";
+"settings.permissions" = "権限";
+"settings.notification" = "通知";
+"settings.notification_allowed" = "許可済み";
+"settings.notification_denied" = "未許可";
+"settings.open_system_settings" = "設定アプリを開く";
+"settings.default_snooze" = "デフォルトスヌーズ";
+"settings.default_dismiss" = "デフォルト解除方法";
+"settings.other" = "その他";
+"settings.vibration" = "振動";
+"settings.language" = "言語";
+"settings.language_section" = "アプリの言語";
+
+/* Onboarding */
+"onboarding.permission_title" = "通知許可";
+"onboarding.permission_message" = "うとうと が適切に動作するためには\n通知の許可が必要です。";
+"onboarding.allow_button" = "通知を許可";
+"onboarding.open_settings" = "設定へ";
+
+/* AlarmKit */
+"alarm_kit.default_title" = "うとうと";
+"alarm_kit.snooze_button" = "スヌーズ";
+
+/* Repeat / weekdays */
+"alarm.repeat_once" = "一度だけ";
+"alarm.repeat_daily" = "毎日";
+"alarm.weekday_sun" = "日";
+"alarm.weekday_mon" = "月";
+"alarm.weekday_tue" = "火";
+"alarm.weekday_wed" = "水";
+"alarm.weekday_thu" = "木";
+"alarm.weekday_fri" = "金";
+"alarm.weekday_sat" = "土";
+
+/* Wake texts */
+"wake.1" = "おはよう…起きようか";
+"wake.2" = "時間だよ！";
+"wake.3" = "もう起きる時間だよ〜";
+"wake.4" = "早く起きなさい！";
+"wake.5" = "素敵な朝だね";

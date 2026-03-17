@@ -23,8 +23,7 @@ struct RingingFeature {
         }
 
         static func randomWakeText() -> String {
-            ["おはよう…起きようか", "時間だよ！", "もう起きる時間だよ〜",
-             "早く起きなさい！", "素敵な朝だね"].randomElement()!
+            L10n.wakeTexts.randomElement()!
         }
     }
 

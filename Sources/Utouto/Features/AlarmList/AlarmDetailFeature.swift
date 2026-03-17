@@ -56,10 +56,16 @@ struct AlarmDetailFeature {
                 state.alarm = updated
                 let isEnabled = updated.enabled
                 let alarmId = updated.id
-                let audioURL: URL? = nil
+                let clipId = updated.clipId
                 return .run { [updated] send in
                     try? await alarmRepository.updateAlarm(updated)
                     if isEnabled {
+                        let audioURL: URL? = await {
+                            guard let clipId else { return nil }
+                            let clips = (try? await videoClipClient.loadClips()) ?? []
+                            guard let clip = clips.first(where: { $0.id == clipId }) else { return nil }
+                            return videoClipClient.audioURL(clip)
+                        }()
                         try? await alarmKitClient.scheduleAlarm(updated, audioURL)
                     } else {
                         await alarmKitClient.cancelAlarm(alarmId)

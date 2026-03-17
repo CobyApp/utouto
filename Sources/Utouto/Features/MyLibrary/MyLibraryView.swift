@@ -15,7 +15,7 @@ struct MyLibraryView: View {
                     clipList
                 }
             }
-            .navigationTitle("マイライブラリ")
+            .navigationTitle(L10n.myLibraryTitle)
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Button { store.send(.showClipEditor) } label: {
@@ -24,14 +24,14 @@ struct MyLibraryView: View {
                 }
             }
             // スワイプ削除のアラート
-            .alert("削除しますか？", isPresented: Binding(
+            .alert(L10n.libraryDeleteConfirmTitle, isPresented: Binding(
                 get: { store.showDeleteAlert },
                 set: { _ in store.send(.hideDeleteAlert) }
             ), presenting: store.clipToDelete) { clip in
-                Button("削除", role: .destructive) { store.send(.confirmDelete(clip)) }
-                Button("キャンセル", role: .cancel) {}
+                Button(L10n.delete, role: .destructive) { store.send(.confirmDelete(clip)) }
+                Button(L10n.cancel, role: .cancel) {}
             } message: { _ in
-                Text("このクリップを削除します。")
+                Text(L10n.libraryDeleteConfirmMessage)
             }
             // クリップ編集シート
             .sheet(isPresented: Binding(
@@ -66,12 +66,12 @@ struct MyLibraryView: View {
         VStack(spacing: 16) {
             Image(systemName: "music.note.list")
                 .font(.system(size: 60)).foregroundStyle(.secondary)
-            Text("クリップがありません")
+            Text(L10n.libraryEmptyTitle)
                 .font(.headline).foregroundStyle(.secondary)
-            Text("＋ボタンで動画からクリップを作ろう")
+            Text(L10n.libraryEmptySubtitle)
                 .font(.subheadline).foregroundStyle(.secondary)
             Button { store.send(.showClipEditor) } label: {
-                Text("クリップを作成")
+                Text(L10n.libraryCreateClip)
                     .font(.headline).foregroundStyle(.white)
                     .padding(.horizontal, 24).padding(.vertical, 12)
                     .background(Color.blue).clipShape(RoundedRectangle(cornerRadius: 12))
@@ -91,7 +91,7 @@ struct MyLibraryView: View {
                         Button(role: .destructive) {
                             store.send(.deleteClip(clip))
                         } label: {
-                            Label("削除", systemImage: "trash")
+                            Label(L10n.delete, systemImage: "trash")
                         }
                     }
             }

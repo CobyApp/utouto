@@ -1,6 +1,7 @@
 import Foundation
 import SwiftUI
 import AlarmKit
+import ActivityKit
 import ComposableArchitecture
 
 /// Metadata for AlarmKit UI (required by AlarmAttributes).
@@ -22,15 +23,15 @@ extension AlarmKitClient: DependencyKey {
                 return state == .authorized
             },
             isAuthorized: {
-                await manager.authorizationState == .authorized
+                manager.authorizationState == .authorized
             },
-            scheduleAlarm: { alarm, _ in
+            scheduleAlarm: { alarm, audioURL in
                 let schedule = makeSchedule(from: alarm)
                 let presentation = AlarmPresentation(
                     alert: AlarmPresentation.Alert(
-                        title: LocalizedStringResource(stringLiteral: alarm.label.isEmpty ? "うとうと" : alarm.label),
+                        title: LocalizedStringResource(stringLiteral: alarm.label.isEmpty ? L10n.alarmKitDefaultTitle : alarm.label),
                         secondaryButton: alarm.snoozeEnabled
-                            ? AlarmButton(text: "スヌーズ", textColor: .blue, systemImageName: "moon.zzz")
+                            ? AlarmButton(text: LocalizedStringResource(stringLiteral: L10n.alarmKitSnoozeButton), textColor: .blue, systemImageName: "moon.zzz")
                             : nil,
                         secondaryButtonBehavior: alarm.snoozeEnabled ? .countdown : nil
                     )
@@ -41,12 +42,13 @@ extension AlarmKitClient: DependencyKey {
                     metadata: metadata,
                     tintColor: Color.blue
                 )
+                let sound = Self.soundForAlarm(alarmId: alarm.id, clipAudioURL: audioURL)
                 let config = AlarmManager.AlarmConfiguration<UtoutoAlarmMetadata>.alarm(
                     schedule: schedule,
                     attributes: attributes,
                     stopIntent: nil,
                     secondaryIntent: nil,
-                    sound: .default
+                    sound: sound
                 )
                 _ = try await manager.schedule(id: alarm.id, configuration: config)
             },
@@ -55,6 +57,28 @@ extension AlarmKitClient: DependencyKey {
             }
         )
     }()
+}
+
+// MARK: - Custom alarm sound (Library/Sounds for lock screen playback)
+
+private extension AlarmKitClient {
+    /// Copy clip audio to Library/Sounds and return AlertSound so the alarm rings with custom sound on lock screen.
+    static func soundForAlarm(alarmId: UUID, clipAudioURL: URL?) -> AlertConfiguration.AlertSound {
+        guard let sourceURL = clipAudioURL else { return .default }
+        let fm = FileManager.default
+        guard let libraryURL = fm.urls(for: .libraryDirectory, in: .userDomainMask).first else { return .default }
+        let soundsDir = libraryURL.appendingPathComponent("Sounds", isDirectory: true)
+        let fileName = "\(alarmId.uuidString).m4a"
+        let destURL = soundsDir.appendingPathComponent(fileName)
+        do {
+            try fm.createDirectory(at: soundsDir, withIntermediateDirectories: true)
+            if fm.fileExists(atPath: destURL.path) { try fm.removeItem(at: destURL) }
+            try fm.copyItem(at: sourceURL, to: destURL)
+            return .named(fileName)
+        } catch {
+            return .default
+        }
+    }
 }
 
 extension DependencyValues {

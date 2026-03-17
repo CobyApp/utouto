@@ -38,6 +38,7 @@ struct AlarmListFeature {
 
     @Dependency(\.alarmRepository) var alarmRepository
     @Dependency(\.alarmKitClient) var alarmKitClient
+    @Dependency(\.videoClipClient) var videoClipClient
     @Dependency(\.clock) var clock
     @Dependency(\.logger) var logger
 
@@ -64,6 +65,7 @@ struct AlarmListFeature {
             case let .toggleAlarm(alarm):
                 let isEnabled = !alarm.enabled
                 let alarmId = alarm.id
+                let clipId = alarm.clipId
                 return .run { send in
                     do {
                         var updatedAlarm = alarm
@@ -71,7 +73,13 @@ struct AlarmListFeature {
                         updatedAlarm.updatedAt = clock.now()
                         try await alarmRepository.updateAlarm(updatedAlarm)
                         if isEnabled {
-                            try await alarmKitClient.scheduleAlarm(updatedAlarm, nil)
+                            let audioURL: URL? = await {
+                                guard let clipId else { return nil }
+                                let clips = (try? await videoClipClient.loadClips()) ?? []
+                                guard let clip = clips.first(where: { $0.id == clipId }) else { return nil }
+                                return videoClipClient.audioURL(clip)
+                            }()
+                            try await alarmKitClient.scheduleAlarm(updatedAlarm, audioURL)
                         } else {
                             await alarmKitClient.cancelAlarm(alarmId)
                         }
