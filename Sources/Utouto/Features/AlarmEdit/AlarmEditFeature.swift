@@ -108,10 +108,17 @@ struct AlarmEditFeature {
                     do {
                         if isNew { try await alarmRepository.saveAlarm(a) }
                         else { try await alarmRepository.updateAlarm(a) }
-                        try await alarmKitClient.scheduleAlarm(a, audioURL)
+                        do {
+                            try await alarmKitClient.scheduleAlarm(a, audioURL)
+                        } catch {
+                            print("AlarmKit schedule error: \(error)")
+                        }
                         await send(.saveResponse)
                         await send(.delegate(.saveAlarm(a)))
-                    } catch { print("Save error: \(error)") }
+                    } catch {
+                        print("Save error: \(error)")
+                        await send(.saveResponse)
+                    }
                 }
             case .saveResponse: state.isSaving = false; return .none
             case .cancel: return .send(.delegate(.dismiss))

@@ -26,7 +26,16 @@ extension AlarmKitClient: DependencyKey {
                 manager.authorizationState == .authorized
             },
             scheduleAlarm: { alarm, audioURL in
-                let schedule = makeSchedule(from: alarm)
+                if manager.authorizationState != .authorized {
+                    _ = try await MainActor.run { try await manager.requestAuthorization() }
+                }
+                let authorized = await MainActor.run { manager.authorizationState == .authorized }
+                guard authorized else {
+                    throw NSError(domain: "AlarmKit", code: -2, userInfo: [NSLocalizedDescriptionKey: "Alarm authorization not granted"])
+                }
+                guard let schedule = makeSchedule(from: alarm) else {
+                    throw NSError(domain: "AlarmKit", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid alarm schedule"])
+                }
                 let presentation = AlarmPresentation(
                     alert: AlarmPresentation.Alert(
                         title: LocalizedStringResource(stringLiteral: alarm.label.isEmpty ? L10n.alarmKitDefaultTitle : alarm.label),
@@ -50,7 +59,9 @@ extension AlarmKitClient: DependencyKey {
                     secondaryIntent: nil,
                     sound: sound
                 )
-                _ = try await manager.schedule(id: alarm.id, configuration: config)
+                try await MainActor.run {
+                    _ = try await manager.schedule(id: alarm.id, configuration: config)
+                }
             },
             cancelAlarm: { id in
                 try? await manager.cancel(id: id)
@@ -96,7 +107,11 @@ private func makeSchedule(from alarm: Alarm) -> AlarmKit.Alarm.Schedule? {
     let time = AlarmKit.Alarm.Schedule.Relative.Time(hour: hour, minute: minute)
 
     if let oneTime = alarm.oneTimeDate, alarm.repeatDays.isEmpty {
-        return .fixed(oneTime)
+        var date = oneTime
+        if date <= Date() {
+            date = Calendar.current.date(byAdding: .day, value: 1, to: date) ?? date
+        }
+        return .fixed(date)
     }
 
     if alarm.repeatDays.isEmpty {
