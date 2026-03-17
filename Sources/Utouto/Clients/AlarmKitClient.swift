@@ -27,7 +27,7 @@ extension AlarmKitClient: DependencyKey {
             },
             scheduleAlarm: { alarm, audioURL in
                 if manager.authorizationState != .authorized {
-                    _ = try await MainActor.run { try await manager.requestAuthorization() }
+                    _ = try await manager.requestAuthorization()
                 }
                 let authorized = await MainActor.run { manager.authorizationState == .authorized }
                 guard authorized else {
@@ -59,9 +59,7 @@ extension AlarmKitClient: DependencyKey {
                     secondaryIntent: nil,
                     sound: sound
                 )
-                try await MainActor.run {
-                    _ = try await manager.schedule(id: alarm.id, configuration: config)
-                }
+                _ = try await manager.schedule(id: alarm.id, configuration: config)
             },
             cancelAlarm: { id in
                 try? await manager.cancel(id: id)
