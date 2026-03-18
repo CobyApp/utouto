@@ -65,6 +65,7 @@ extension L10n {
     static var close: String { tr("common.close") }
     static var save: String { tr("common.save") }
     static var edit: String { tr("common.edit") }
+    static var commonOk: String { tr("common.ok") }
 
     // Alarm detail
     static var alarmDefaultLabel: String { tr("alarm.detail.default_label") }
@@ -105,6 +106,8 @@ extension L10n {
     static var dismissMethodPicker: String { tr("alarm.edit.dismiss_method_picker") }
     static var minutesFormat: String { tr("alarm.edit.minutes_format") }
     static var timesFormat: String { tr("alarm.edit.times_format") }
+    static var alarmScheduleFailedTitle: String { tr("alarm.edit.schedule_failed_title") }
+    static var alarmScheduleFailedHint: String { tr("alarm.edit.schedule_failed_hint") }
 
     // Ringing
     static var slideToWake: String { tr("ringing.slide_to_wake") }
@@ -175,9 +178,13 @@ extension L10n {
     static var onboardingAllowButton: String { tr("onboarding.allow_button") }
     static var onboardingOpenSettings: String { tr("onboarding.open_settings") }
 
-    // AlarmKit (system alert)
+    // AlarmKit (system alert, countdown, paused)
     static var alarmKitDefaultTitle: String { tr("alarm_kit.default_title") }
     static var alarmKitSnoozeButton: String { tr("alarm_kit.snooze_button") }
+    static var alarmKitCountdownTitle: String { tr("alarm_kit.countdown_title") }
+    static var alarmKitPauseButton: String { tr("alarm_kit.pause_button") }
+    static var alarmKitResumeButton: String { tr("alarm_kit.resume_button") }
+    static var alarmKitPausedTitle: String { tr("alarm_kit.paused_title") }
 
     // Repeat / weekdays
     static var repeatOnceOnly: String { tr("alarm.repeat_once") }

@@ -16,6 +16,7 @@
 "common.close" = "닫기";
 "common.save" = "저장";
 "common.edit" = "편집";
+"common.ok" = "확인";
 
 /* Alarm list */
 "alarm.list.title" = "알람";
@@ -64,6 +65,8 @@
 "alarm.edit.dismiss_method_picker" = "방법";
 "alarm.edit.minutes_format" = "%d분";
 "alarm.edit.times_format" = "%d회";
+"alarm.edit.schedule_failed_title" = "알람을 등록할 수 없습니다";
+"alarm.edit.schedule_failed_hint" = "알람은 저장되었지만 울리지 않을 수 있습니다. 설정 > 우투토 > 알람에서 확인 후 다시 시도하세요.";
 
 /* Ringing */
 "ringing.slide_to_wake" = "슬라이드하여 일어나기";
@@ -135,6 +138,10 @@
 /* AlarmKit */
 "alarm_kit.default_title" = "우투토";
 "alarm_kit.snooze_button" = "스누즈";
+"alarm_kit.countdown_title" = "알람";
+"alarm_kit.pause_button" = "일시 정지";
+"alarm_kit.resume_button" = "재개";
+"alarm_kit.paused_title" = "일시 정지됨";
 
 /* Repeat / weekdays */
 "alarm.repeat_once" = "한 번만";

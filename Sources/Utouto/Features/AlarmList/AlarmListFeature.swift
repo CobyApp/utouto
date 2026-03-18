@@ -60,7 +60,21 @@ struct AlarmListFeature {
             case let .alarmsResponse(alarms):
                 state.alarms = alarms.sorted { $0.timeString < $1.timeString }
                 state.isLoading = false
-                return .none
+                let enabledAlarms = alarms.filter(\.enabled)
+                guard !enabledAlarms.isEmpty else { return .none }
+                return .run { send in
+                    let clips = (try? await videoClipClient.loadClips()) ?? []
+                    for alarm in enabledAlarms {
+                        let audioURL: URL? = alarm.clipId.flatMap { id in
+                            clips.first(where: { $0.id == id }).map { videoClipClient.audioURL($0) }
+                        }
+                        do {
+                            try await alarmKitClient.scheduleAlarm(alarm, audioURL)
+                        } catch {
+                            logger.error("AlarmKit re-schedule failed for \(alarm.id): \(error)")
+                        }
+                    }
+                }
 
             case let .toggleAlarm(alarm):
                 let isEnabled = !alarm.enabled

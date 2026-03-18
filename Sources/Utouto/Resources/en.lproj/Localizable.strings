@@ -16,6 +16,7 @@
 "common.close" = "Close";
 "common.save" = "Save";
 "common.edit" = "Edit";
+"common.ok" = "OK";
 
 /* Alarm list */
 "alarm.list.title" = "Alarms";
@@ -64,6 +65,8 @@
 "alarm.edit.dismiss_method_picker" = "Method";
 "alarm.edit.minutes_format" = "%d min";
 "alarm.edit.times_format" = "%d times";
+"alarm.edit.schedule_failed_title" = "Alarm could not be registered";
+"alarm.edit.schedule_failed_hint" = "The alarm was saved but may not ring. Check Settings > うとうと > Alarms and try again.";
 
 /* Ringing */
 "ringing.slide_to_wake" = "Slide to wake";
@@ -135,6 +138,10 @@
 /* AlarmKit */
 "alarm_kit.default_title" = "Utouto";
 "alarm_kit.snooze_button" = "Snooze";
+"alarm_kit.countdown_title" = "Alarm";
+"alarm_kit.pause_button" = "Pause";
+"alarm_kit.resume_button" = "Resume";
+"alarm_kit.paused_title" = "Paused";
 
 /* Repeat / weekdays */
 "alarm.repeat_once" = "Once";

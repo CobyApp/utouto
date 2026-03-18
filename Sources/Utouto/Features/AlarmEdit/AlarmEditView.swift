@@ -115,6 +115,14 @@ struct AlarmEditFeatureView: View {
                 }
             }
             .task { await store.send(.loadClips).finish() }
+            .alert(L10n.alarmScheduleFailedTitle, isPresented: Binding(
+                get: { store.saveAlarmKitError != nil },
+                set: { if !$0 { store.send(.dismissSaveAlarmKitError) } }
+            )) {
+                Button(L10n.commonOk, role: .cancel) { store.send(.dismissSaveAlarmKitError) }
+            } message: {
+                Text(L10n.alarmScheduleFailedHint)
+            }
         }
     }
 }

@@ -3,9 +3,7 @@ import SwiftUI
 import AlarmKit
 import ActivityKit
 import ComposableArchitecture
-
-/// Metadata for AlarmKit UI (required by AlarmAttributes).
-struct UtoutoAlarmMetadata: AlarmMetadata, Sendable {}
+import UtoutoAlarmKit
 
 struct AlarmKitClient {
     var requestAuthorization: @Sendable () async throws -> Bool
@@ -36,22 +34,39 @@ extension AlarmKitClient: DependencyKey {
                 guard let schedule = makeSchedule(from: alarm) else {
                     throw NSError(domain: "AlarmKit", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid alarm schedule"])
                 }
-                let presentation = AlarmPresentation(
-                    alert: AlarmPresentation.Alert(
-                        title: LocalizedStringResource(stringLiteral: alarm.label.isEmpty ? L10n.alarmKitDefaultTitle : alarm.label),
-                        secondaryButton: alarm.snoozeEnabled
-                            ? AlarmButton(text: LocalizedStringResource(stringLiteral: L10n.alarmKitSnoozeButton), textColor: .blue, systemImageName: "moon.zzz")
-                            : nil,
-                        secondaryButtonBehavior: alarm.snoozeEnabled ? .countdown : nil
-                    )
+                let alertTitle = LocalizedStringResource(stringLiteral: alarm.label.isEmpty ? L10n.alarmKitDefaultTitle : alarm.label)
+                let alert = AlarmPresentation.Alert(
+                    title: alertTitle,
+                    secondaryButton: alarm.snoozeEnabled
+                        ? AlarmButton(text: LocalizedStringResource(stringLiteral: L10n.alarmKitSnoozeButton), textColor: .blue, systemImageName: "moon.zzz")
+                        : nil,
+                    secondaryButtonBehavior: alarm.snoozeEnabled ? .countdown : nil
                 )
+                let countdownTitle = LocalizedStringResource(stringLiteral: L10n.alarmKitCountdownTitle)
+                let pauseButton = AlarmButton(
+                    text: LocalizedStringResource(stringLiteral: L10n.alarmKitPauseButton),
+                    textColor: .blue,
+                    systemImageName: "pause.circle"
+                )
+                let countdown = AlarmPresentation.Countdown(title: countdownTitle, pauseButton: pauseButton)
+                let resumeButton = AlarmButton(
+                    text: LocalizedStringResource(stringLiteral: L10n.alarmKitResumeButton),
+                    textColor: .blue,
+                    systemImageName: "play.circle"
+                )
+                let paused = AlarmPresentation.Paused(
+                    title: LocalizedStringResource(stringLiteral: L10n.alarmKitPausedTitle),
+                    resumeButton: resumeButton
+                )
+                let presentation = AlarmPresentation(alert: alert, countdown: countdown, paused: paused)
                 let metadata = UtoutoAlarmMetadata()
                 let attributes = AlarmAttributes(
                     presentation: presentation,
                     metadata: metadata,
                     tintColor: Color.blue
                 )
-                let sound = Self.soundForAlarm(alarmId: alarm.id, clipAudioURL: audioURL)
+                // Use .default sound to avoid rejection; custom sound can be re-enabled after confirming alarm fires
+                let sound: AlertConfiguration.AlertSound = .default
                 let config = AlarmManager.AlarmConfiguration<UtoutoAlarmMetadata>.alarm(
                     schedule: schedule,
                     attributes: attributes,
@@ -60,6 +75,9 @@ extension AlarmKitClient: DependencyKey {
                     sound: sound
                 )
                 _ = try await manager.schedule(id: alarm.id, configuration: config)
+                #if DEBUG
+                print("[AlarmKit] Scheduled alarm id=\(alarm.id) schedule=\(schedule)")
+                #endif
             },
             cancelAlarm: { id in
                 try? await manager.cancel(id: id)

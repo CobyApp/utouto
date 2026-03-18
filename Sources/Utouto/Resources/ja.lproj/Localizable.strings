@@ -16,6 +16,7 @@
 "common.close" = "閉じる";
 "common.save" = "保存";
 "common.edit" = "編集";
+"common.ok" = "OK";
 
 /* Alarm list */
 "alarm.list.title" = "アラーム";
@@ -64,6 +65,8 @@
 "alarm.edit.dismiss_method_picker" = "方法";
 "alarm.edit.minutes_format" = "%d分";
 "alarm.edit.times_format" = "%d回";
+"alarm.edit.schedule_failed_title" = "アラームを登録できませんでした";
+"alarm.edit.schedule_failed_hint" = "アラームは保存されましたが鳴らない場合があります。設定＞うとうと＞アラームを確認して再度お試しください。";
 
 /* Ringing */
 "ringing.slide_to_wake" = "スライドして起きる";
@@ -135,6 +138,10 @@
 /* AlarmKit */
 "alarm_kit.default_title" = "うとうと";
 "alarm_kit.snooze_button" = "スヌーズ";
+"alarm_kit.countdown_title" = "アラーム";
+"alarm_kit.pause_button" = "一時停止";
+"alarm_kit.resume_button" = "再開";
+"alarm_kit.paused_title" = "一時停止中";
 
 /* Repeat / weekdays */
 "alarm.repeat_once" = "一度だけ";

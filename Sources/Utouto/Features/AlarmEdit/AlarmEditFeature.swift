@@ -21,6 +21,7 @@ struct AlarmEditFeature {
         var dismissMode: Alarm.DismissMode
         var selectedClipId: UUID?
         var availableClips: [VideoClip] = []
+        var saveAlarmKitError: String?
 
         var canSave: Bool { true }
         var selectedClip: VideoClip? { availableClips.first { $0.id == selectedClipId } }
@@ -55,7 +56,7 @@ struct AlarmEditFeature {
         case selectClip(UUID?); case toggleSnoozeEnabled
         case updateSnoozeInterval(Int); case updateSnoozeMaxCount(Alarm.SnoozeMaxCount)
         case updateDismissMode(Alarm.DismissMode)
-        case saveAlarm; case saveResponse; case cancel; case none
+        case saveAlarm; case saveResponse; case saveAlarmKitFailed(String, Alarm); case dismissSaveAlarmKitError; case cancel; case none
 
         @CasePathable
         enum Delegate { case dismiss; case saveAlarm(Alarm) }
@@ -108,19 +109,27 @@ struct AlarmEditFeature {
                     do {
                         if isNew { try await alarmRepository.saveAlarm(a) }
                         else { try await alarmRepository.updateAlarm(a) }
+                        var scheduleFailed: String?
                         do {
                             try await alarmKitClient.scheduleAlarm(a, audioURL)
                         } catch {
                             print("AlarmKit schedule error: \(error)")
+                            scheduleFailed = error.localizedDescription
                         }
                         await send(.saveResponse)
-                        await send(.delegate(.saveAlarm(a)))
+                        if let msg = scheduleFailed {
+                            await send(.saveAlarmKitFailed(msg, a))
+                        } else {
+                            await send(.delegate(.saveAlarm(a)))
+                        }
                     } catch {
                         print("Save error: \(error)")
                         await send(.saveResponse)
                     }
                 }
             case .saveResponse: state.isSaving = false; return .none
+            case let .saveAlarmKitFailed(message, savedAlarm): state.saveAlarmKitError = message; state.alarm = savedAlarm; return .none
+            case .dismissSaveAlarmKitError: state.saveAlarmKitError = nil; return .send(.delegate(.saveAlarm(state.alarm)))
             case .cancel: return .send(.delegate(.dismiss))
             case .delegate: return .none
             }
